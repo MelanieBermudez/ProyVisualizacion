@@ -1,30 +1,123 @@
-.app{
+.app {
     width: 100%;
     height: 100%;
-    background-color: black;
-    padding: 0;
-    top: 0;
+    font-family: 'Bebas Neue';
 }
 
-.body{
-    width: 100%;
-    height: 100%;
-
-}
-/* .header{
+.header {
     background-color: #B10606;
     color: white;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     width: 100vw;
+    height: 100px;
+    top: 0;
+    left: 0;
+    position: fixed;
 }
 
-.title{
-    background-color: aquamarine;
+.title {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 50%;
 }
-.options{
+
+.name {
+    font-size: 60px;
+    width: 100%;
+    text-align: center;
+}
+
+.options {
     display: flex;
     flex-direction: row;
-    background-color: blue;
-} */
+    width: 50%;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 25px;
+}
+
+.body {
+    width: 100%;
+    height: 100%;
+    top: 100px;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    background-color: #060529;
+    width: 250px;
+    height: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+}
+
+.sidebar1 {
+    background-color: #060529;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    padding: 10px;
+}
+
+.label {
+    color: white;
+}
+
+.b {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'Bebas Neue';
+}
+
+.button {
+    background-color: #B10606;
+    color: white;
+    border-radius: 30px;
+    font-size: 25px;
+    width: 50%;
+    padding: 1px;
+}
+
+.top-menu {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: 20%;
+    align-items: center;
+
+}
+
+.above-menu {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: 60%;
+    align-items: center;
+}
+
+.menu-title {
+    color: white;
+}
+
+.main{
+    background-color: gray;
+    color: beige;
+    /* left: 250px; */
+    /* margin-left: 250px; */
+    width: 100%;
+}
+
+.form{
+    background-color: #060529;
+}
