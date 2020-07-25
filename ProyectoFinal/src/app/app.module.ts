@@ -11,6 +11,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
 
 
@@ -29,6 +31,7 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatButtonModule,
     MatExpansionModule,
+    HttpClientModule,
     MatInputModule
   ],
   providers: [],

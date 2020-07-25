@@ -15,9 +15,9 @@ db.mysqlConnection.connect((err) => {
 
 })
 
-//obtener postulantes 
+//Cargar Datos
 router.post('/CargarDatos', (req, res) => {
-    db.mysqlConnection.query('CALL CargarDatos(?,?,?,?,?,?,?,?,?,?)', [req.body.typeI, ], (err, row, fields) => {
+    db.mysqlConnection.query('CALL CargarDatos(?,?,?,?,?,?,?,?,?,?)', [req.body.type, req.body.title,req.body.director, req.body.cast, req.body.country, req.body.year, req.body.rate, req.body.duration,  req.body.descrip,req.body.listed], (err, row, fields) => {
         if (!err) {
             res.send(row);
         } else

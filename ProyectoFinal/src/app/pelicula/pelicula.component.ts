@@ -6,19 +6,7 @@ import * as XLSX from 'xlsx';
 
 import {MatSidenavModule} from '@angular/material/sidenav';
 
-export interface Data {
-  typeI:String;
-  titleI:String;
-  directorI:String;
-  castI:String;
-  countryI:String;
-  yearI:String;
-  rateI:String;
-  durationI:String;
-  listedI:String;
-  descripI:Text;
 
-}
 @Component({
   selector: 'app-pelicula',
   templateUrl: './pelicula.component.html',
@@ -44,12 +32,14 @@ export class PeliculaComponent implements OnInit {
 
       const prueba = (XLSX.utils.sheet_to_json(ws, { header: 1 }))
       var size = prueba.length
+      console.log(size)
+      console.log(dataJson)
       var cont, col
       for (cont = 2; cont < size; cont++) {
         col = dataJson[cont]
-        var keyType = '1', keyTitle = '2', keyDirector ='3', keyCast ='4', keyCountry = '5', keyYear= '6',
-        keyRate='7', keyDuration ='8', keyListed = '9', keyDescrip='10'
-
+        var keyType = '0', keyTitle = '1', keyDirector ='2', keyCast ='3', keyCountry = '4', keyYear= '5',
+        keyRate='6', keyDuration ='7', keyListed = '8', keyDescrip='9'
+        var listedAux = col[keyListed].split(',')
         let type = col[keyType]
         let title = col[keyTitle]
         let director = col[keyDirector]
@@ -58,19 +48,18 @@ export class PeliculaComponent implements OnInit {
         let year = col[keyYear]
         let rate = col[keyRate]
         let duration = col[keyDuration]
-        let listed = col[keyListed]
+        let listed = listedAux[0]
         let descrip = col[keyDescrip]
         
-        console.log("type in for")
-        console.log(type)
+     
 
-        const formData = {typeI:type, titleI:title, directorI:director, castI:cast, countryI:country,
-        yearI:year, rateI:rate, durationI:duration, listedI:listed,descripI:descrip}
+        const formData = {type:type, title:title, director:director, cast:cast, country:country,
+        year:year, rate:rate, duration:duration, descrip:descrip, listed:listed}
 
-        console.log("form data type")  
-        console.log(formData.typeI)
+        console.log("formData")
+        console.log(formData)
 
-        this.http.post<any>('/router/CargarDatos', formData).subscribe(
+        this.http.post<any>('http://localhost:3000/router/CargarDatos', formData).subscribe(
           (res) => {
             console.log("importados")
           },
@@ -79,7 +68,7 @@ export class PeliculaComponent implements OnInit {
 
       }
 
-      console.log(dataJson)
+      
 
 
 
