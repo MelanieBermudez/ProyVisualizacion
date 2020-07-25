@@ -4,9 +4,21 @@ import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 
 
-// import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
+export interface Data {
+  typeI:String;
+  titleI:String;
+  directorI:String;
+  castI:String;
+  countryI:String;
+  yearI:String;
+  rateI:String;
+  durationI:String;
+  listedI:String;
+  descripI:Text;
 
+}
 @Component({
   selector: 'app-pelicula',
   templateUrl: './pelicula.component.html',
@@ -14,7 +26,7 @@ import * as XLSX from 'xlsx';
 })
 export class PeliculaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -38,11 +50,38 @@ export class PeliculaComponent implements OnInit {
         var keyType = '1', keyTitle = '2', keyDirector ='3', keyCast ='4', keyCountry = '5', keyYear= '6',
         keyRate='7', keyDuration ='8', keyListed = '9', keyDescrip='10'
 
+        let type = col[keyType]
+        let title = col[keyTitle]
+        let director = col[keyDirector]
+        let cast = col[keyCast]
+        let country = col[keyCountry]
+        let year = col[keyYear]
+        let rate = col[keyRate]
+        let duration = col[keyDuration]
+        let listed = col[keyListed]
+        let descrip = col[keyDescrip]
+        
+        console.log("type in for")
+        console.log(type)
+
+        const formData = {typeI:type, titleI:title, directorI:director, castI:cast, countryI:country,
+        yearI:year, rateI:rate, durationI:duration, listedI:listed,descripI:descrip}
+
+        console.log("form data type")  
+        console.log(formData.typeI)
+
+        this.http.post<any>('/router/CargarDatos', formData).subscribe(
+          (res) => {
+            console.log("importados")
+          },
+          (err) => console.log(err)
+        );
+
       }
 
       console.log(dataJson)
 
-      //bueno y aqui parseo los datos o mando todo el json por backend 
+
 
     
     };
