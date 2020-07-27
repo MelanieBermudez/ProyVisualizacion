@@ -5,20 +5,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PeliculaComponent } from './pelicula/pelicula.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatInputModule} from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatInputModule } from '@angular/material/input';
+import { NgxArcTextModule } from 'ngx-arc-text';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { HttpClientModule } from '@angular/common/http'
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { PrincipalComponent } from './principal/principal.component';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PeliculaComponent
+    PeliculaComponent,
+    PrincipalComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +37,16 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatButtonModule,
     MatExpansionModule,
-    MatInputModule
+    MatInputModule,
+    NgxArcTextModule,
+    MatSlideToggleModule,
+    HttpClientModule,
+    MatButtonToggleModule,
+    NgxChartsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
+
   ],
   providers: [],
   bootstrap: [AppComponent]

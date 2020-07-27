@@ -106,29 +106,26 @@
 
             <div class="main-header">
                 <span class="menu-title-g">{{titulo}}</span>
-                <div class="toggle">
-                    <span class="label-toggle">Grafos</span>
-                    <mat-slide-toggle (change)="toggle($event)"></mat-slide-toggle>
-                    <span class="label-toggle">Graficos</span>
-                </div>
-
-
             </div>
 
-            <div class="graph" *ngIf="!grafo">
+            <div class="graph">
 
-                <h1>grafo</h1>
-                <!-- <div echarts [options]="chartOption" class="demo-chart"></div> -->
-                <div echarts [options]="options | async" class="demo-chart"></div>
-                <div echarts [options]="options | async" class="demo-chart"></div>
-                <div echarts [options]="options | async" class="demo-chart"></div>
+                <!-- <ngx-charts-pie-chart
+                [results]="single"
+                [legend]="showLegend"
+                [legendPosition]="legendPosition"
+                [labels]="showLabels"
+                [doughnut]="isDoughnut"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+                >
+              </ngx-charts-pie-chart> -->
+              
+       
             </div>
 
-            <div class="chart" *ngIf="grafo">
 
-                <h1>chart</h1>
-
-            </div>
 
 
 

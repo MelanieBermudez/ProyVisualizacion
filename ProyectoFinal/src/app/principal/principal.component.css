@@ -130,12 +130,8 @@
 
 .menu-title-g {
     color: #060529;
-    width: 50%;
     display: flex;
     font-size: 40px;
-    align-items: center;
-    height: 100%;
-    padding-left: 10px;
 }
 
 .toggle {
@@ -155,9 +151,10 @@
 
 .main-header {
     display: flex;
-    flex-direction: row;
-    /* height: 120px; */
     color: #060529;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
 }
 
 .graph {
