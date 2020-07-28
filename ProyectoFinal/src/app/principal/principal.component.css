@@ -122,6 +122,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .form {
@@ -154,15 +155,13 @@
     color: #060529;
     justify-content: center;
     align-items: center;
-    background-color: aliceblue;
 }
 
 .graph {
-    background-color: gray;
-    width: 100%;
+    /* width: 100%; */
     /* height: fit-content; */
     /* margin-bottom: 20px; */
-    overflow: scroll;
+    /* overflow: scroll;*/
 }
 
 .expansion {
@@ -182,6 +181,11 @@
     margin: 50px;
     padding: 200px;
 }
+
+::ng-deep .pie-label {
+    font-size: 29px !important;
+}
+
 
 ::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
     background-color: white !important;

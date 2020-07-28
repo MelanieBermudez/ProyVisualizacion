@@ -1,16 +1,13 @@
 <div class="app">
     <div class="header">
-        <div class="title">
+        <div class="title" (click)="onPrincipal()">
             <ngx-arc-text class="name" [text]="text" #letters>
             </ngx-arc-text>
         </div>
         <div class="options">
-            <button mat-button class="options-title">Peliculas</button>
-            <button mat-button class="options-title">Series</button>
-            <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                <mat-button-toggle class="options-title" value="Peliculas">Peliculas</mat-button-toggle>
-                <mat-button-toggle class="options-title" value="Series">Series</mat-button-toggle>
-            </mat-button-toggle-group> -->
+            <button mat-button class="options-title"(click)="onPelicula()">Peliculas</button>
+            <button mat-button class="options-title"(click)="onSerie()">Series</button>
+
         </div>
     </div>
 
@@ -44,7 +41,7 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button mat-button class="button">Generar</button>
+                <button mat-button class="button" (click)="OnGraph()">Generar</button>
 
             </div>
             <div class="above-menu" *ngIf="grafo">

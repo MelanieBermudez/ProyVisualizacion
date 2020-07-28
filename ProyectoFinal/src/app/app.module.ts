@@ -11,9 +11,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
-import { NgxArcTextModule } from 'ngx-arc-text';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { NgxArcTextModule } from 'ngx-arc-text';
 import { HttpClientModule } from '@angular/common/http'
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { PrincipalComponent } from './principal/principal.component';
@@ -42,11 +42,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatSlideToggleModule,
     HttpClientModule,
     MatButtonToggleModule,
-    NgxChartsModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
-
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

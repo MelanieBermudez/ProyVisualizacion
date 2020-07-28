@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { INgxArcTextComponent } from 'ngx-arc-text';
 import { MatSlideToggleChange } from '@angular/material';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import * as echarts from 'echarts';
-import { EChartOption } from 'echarts';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-principal',
@@ -20,8 +20,17 @@ export class PrincipalComponent implements OnInit {
   grafo: boolean
   grafico = false;
 
+  colorScheme = {
+    domain: ['#060529', '#B10606']
+  };
+
+  view: any[] = [1400, 800];
+  gradient: boolean = true;
+  showLabels: boolean = true;
+  isDoughnut: boolean = true;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
 
   ) { }
 
@@ -40,56 +49,47 @@ export class PrincipalComponent implements OnInit {
     this.grafo = event.checked;
 
   }
+  single = [
+    {
+      "name": "Series",
+      "value": 1240
+    },
+    {
+      "name": "Peliculas",
+      "value": 2000
+    },
 
+  ];
 
-  // ngOnInit(){}
+  onSelect(data): void {
+    if (data.name == 'Peliculas')
+      sessionStorage.setItem('tipo', 'pelicula');
 
-  ngOnInit(): void {
-  
-    this.options = this.http
-      .get<any>('./assets/data.json', { responseType: 'json' })
-      .pipe(
-        map((data) => {
-          echarts.util.each(
-            data.children,
-            (datum, index) => index % 2 === 0 && (datum.collapsed = true),
-          );
-          return {
-            tooltip: {
-              trigger: 'item',
-              triggerOn: 'mousemove',
-            },
-            series: [
-              {
-                type: 'tree',
-                data: [data],
-                top: '1%',
-                left: '7%',
-                bottom: '1%',
-                right: '20%',
-                symbolSize: 7,
-                label: {
-                  position: 'left',
-                  verticalAlign: 'middle',
-                  align: 'right',
-                  fontSize: 9,
-                },
-                leaves: {
-                  label: {
-                    position: 'right',
-                    verticalAlign: 'middle',
-                    align: 'left',
-                  },
-                },
-                expandAndCollapse: true,
-                animationDuration: 550,
-                animationDurationUpdate: 750,
-              },
-            ],
-          };
-        }),
-      );
+    else
+      sessionStorage.setItem('tipo', 'serie');
+
+    this.router.navigate(['peliculas']);
+
   }
+
+
+  onPelicula():any{
+    sessionStorage.setItem('tipo', 'pelicula');
+    this.router.navigate(['peliculas']);
+  }
+  onSerie(){
+    console.log("dasdas")
+    sessionStorage.setItem('tipo', 'serie');
+    this.router.navigate(['peliculas']);
+  }
+
+  onPrincipal(){
+    this.router.navigate(['principal']);
+  }
+  ngOnInit() {
+    console.log( sessionStorage.getItem('tipo') )
+   }
+
 
 
 
