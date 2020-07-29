@@ -19,6 +19,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { PrincipalComponent } from './principal/principal.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 
 
@@ -45,7 +47,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
-    NgxChartsModule
+    NgxChartsModule,
+    ReactiveFormsModule,
+    FormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

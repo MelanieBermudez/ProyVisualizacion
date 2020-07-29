@@ -24,7 +24,7 @@ export class PrincipalComponent implements OnInit {
     domain: ['#060529', '#B10606']
   };
 
-  view: any[] = [1400, 800];
+  view: any[] = [500, 400];
   gradient: boolean = true;
   showLabels: boolean = true;
   isDoughnut: boolean = true;

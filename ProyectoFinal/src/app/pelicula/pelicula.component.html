@@ -5,8 +5,8 @@
             </ngx-arc-text>
         </div>
         <div class="options">
-            <button mat-button class="options-title"(click)="onPelicula()">Peliculas</button>
-            <button mat-button class="options-title"(click)="onSerie()">Series</button>
+            <button mat-button class="options-title" (click)="onPelicula()">Peliculas</button>
+            <button mat-button class="options-title" (click)="onSerie()">Series</button>
 
         </div>
     </div>
@@ -15,82 +15,73 @@
 
         <div class="sidebar">
             <div class="top-menu">
-
                 <div class="menu-title">
                     <H1>Opciones</H1>
                 </div>
-                <mat-form-field appearence="outline">
-                    <mat-label class="label">Categoria</mat-label>
-                    <mat-select>
-                        <mat-option value='pruba1'>
-                            pruba1
-                        </mat-option>
-                        <mat-option value='pruba3'>
-                            pruba3
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearence="outline">
-                    <mat-label class="label">Pais</mat-label>
-                    <mat-select>
-                        <mat-option value='pruba1'>
-                            pruba1
-                        </mat-option>
-                        <mat-option value='pruba3'>
-                            pruba3
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <button mat-button class="button" (click)="OnGraph()">Generar</button>
+                <form [formGroup]="opcionesFormGroup">
+                    <mat-form-field class="form-field" appearence="outline">
+                        <mat-label class="label">Categoria</mat-label>
+                        <mat-select formControlName="categoria">
+                            <mat-option *ngFor="let categoria of categorias" [value]='categoria'>
+                                {{categoria}}
+                            </mat-option>
 
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="form-field" appearence="outline">
+                        <mat-label class="label">Pais</mat-label>
+                        <mat-select formControlName="pais">
+                            <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais}}</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </form>
+                <button mat-button class="button" (click)="OnGraph()">Generar</button>
             </div>
-            <div class="above-menu" *ngIf="grafo">
+            <div class="above-menu" *ngIf="grafo" [@enterAnimation]>
                 <div class="menu-title">
                     <H1>Filtros</H1>
                 </div>
-                <div>
+                <!-- <div> -->
+                <form [formGroup]="filtrosFormGroup">
                     <mat-accordion class="form">
                         <mat-expansion-panel class="mat-elevation-z0 expansion" hideToggle>
                             <mat-expansion-panel-header class="expansion">
                                 <mat-panel-title class="label"> Fechas </mat-panel-title>
                             </mat-expansion-panel-header>
-                            <form>
-                                <mat-form-field class="expansion">
-                                    <mat-label class="label">Fecha inicio</mat-label>
-                                    <input matInput type="number">
-                                </mat-form-field>
+                            <mat-form-field class="expansion">
+                                <mat-label class="label">Fecha inicio</mat-label>
+                                <input matInput formControlName="fechainicio" type="number">
+                            </mat-form-field>
 
-                                <mat-form-field class="expansion">
-                                    <mat-label class="label">Fecha final</mat-label>
-                                    <input matInput type="hide">
-                                </mat-form-field>
-                            </form>
+                            <mat-form-field class="expansion">
+                                <mat-label class="label">Fecha final</mat-label>
+                                <input matInput formControlName="fechafinal" type="number">
+                            </mat-form-field>
                         </mat-expansion-panel>
                     </mat-accordion>
-                </div>
-                <mat-form-field appearence="outline">
-                    <mat-label class="label">Duración</mat-label>
-                    <mat-select>
-                        <mat-option value='pruba1'>
-                            pruba1
-                        </mat-option>
-                        <mat-option value='pruba3'>
-                            pruba3
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearence="outline">
-                    <mat-label class="label">Director</mat-label>
-                    <mat-select>
-                        <mat-option value='pruba1'>
-                            pruba1
-                        </mat-option>
-                        <mat-option value='pruba3'>
-                            pruba3
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <!-- </div> -->
+                    <mat-form-field class="form-field" appearence="outline">
+                        <mat-label class="label">Duración</mat-label>
+                        <mat-select formControlName="duracion">
+                            <mat-option value='duracion'>{{duracion}}
+                            </mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="form-field" appearence="outline">
+                        <mat-label class="label">Director</mat-label>
+                        <mat-select formControlName="director">
+                            <mat-option *ngFor="let director of directores" [value]="director">
+                                {{director}}
+                            </mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </form>
                 <button mat-button class="button">Filtrar</button>
+
+
 
             </div>
 
@@ -108,22 +99,23 @@
                     <mat-slide-toggle (change)="toggle($event)"></mat-slide-toggle>
                     <span class="label-toggle">Graficos</span>
                 </div>
-
-
             </div>
 
-            <div class="graph" *ngIf="!grafo">
-
-                <h1>grafo</h1>
-                <!-- <div echarts [options]="chartOption" class="demo-chart"></div> -->
+            <div class="graph" *ngIf="!grafo" [@enterAnimationx]>
                 <div echarts [options]="options | async" class="demo-chart"></div>
-                <div echarts [options]="options | async" class="demo-chart"></div>
-                <div echarts [options]="options | async" class="demo-chart"></div>
+                <div echarts [options]="options1 | async" [merge]='true' class="demo-chart"></div>
             </div>
 
-            <div class="chart" *ngIf="grafo">
+            <div class="chart" *ngIf="grafo" [@enterAnimationx]>
 
-                <h1>chart</h1>
+                <h1>Cantidad de Peliculas por Categoria y pais</h1>
+                <ngx-charts-bar-horizontal [scheme]="colorScheme" class="grafico" [view]="view" [results]="single" 
+                      (select)="onSelect($event)">
+                </ngx-charts-bar-horizontal>
+                <h1>Promedio de ratings por Categoria y pais</h1>
+                <ngx-charts-number-card [scheme]="colorScheme" [view]="view" [results]="single" 
+                      (select)="onSelect($event)" class="grafico">
+                </ngx-charts-number-card>
 
             </div>
 

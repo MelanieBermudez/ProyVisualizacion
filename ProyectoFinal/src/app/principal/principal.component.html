@@ -5,8 +5,8 @@
             </ngx-arc-text>
         </div>
         <div class="options">
-            <button mat-button class="options-title"(click)="onPelicula()">Peliculas</button>
-            <button mat-button class="options-title"(click)="onSerie()">Series</button>
+            <button mat-button class="options-title" (click)="onPelicula()">Peliculas</button>
+            <button mat-button class="options-title" (click)="onSerie()">Series</button>
             <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
                 <mat-button-toggle class="options-title" value="Peliculas">Peliculas</mat-button-toggle>
                 <mat-button-toggle class="options-title" value="Series">Series</mat-button-toggle>
@@ -16,7 +16,7 @@
 
     <div class="body">
 
-        <div class="sidebar" >
+        <div class="sidebar">
             <div class="top-menu">
 
                 <div class="menu-title">
@@ -112,9 +112,9 @@
 
                 <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
                     [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
-                </ngx-charts-pie-chart>
+                </ngx-charts-pie-chart> 
 
-
+   
 
             </div>
 
