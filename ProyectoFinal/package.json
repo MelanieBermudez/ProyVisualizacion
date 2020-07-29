@@ -2,8 +2,9 @@
   "name": "proyecto-final",
   "version": "0.0.0",
   "scripts": {
+    "dev": "nodemon server.js",
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy-conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -26,6 +27,7 @@
     "cors": "2.8.5",
     "echarts": "^4.8.0",
     "express": "4.17.1",
+    "material": "^0.4.3",
     "mysql": "2.18.1",
     "mysql2": "2.1.0",
     "ngx-arc-text": "^1.0.1",

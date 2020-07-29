@@ -20,6 +20,7 @@ import { PrincipalComponent } from './principal/principal.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 
 
@@ -51,6 +52,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule,
     FormsModule,
 
+    HttpClientModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
