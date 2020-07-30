@@ -5,7 +5,7 @@ import { INgxArcTextComponent } from 'ngx-arc-text';
 import { MatSlideToggleChange } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, retry } from 'rxjs/operators';
 import * as echarts from 'echarts';
 import { EChartOption } from 'echarts';
 import { Router } from '@angular/router';
@@ -17,18 +17,18 @@ import { ConnectedPositionStrategy } from '@angular/cdk/overlay';
   templateUrl: './pelicula.component.html',
   styleUrls: ['./pelicula.component.css'],
   animations: [
-    trigger(
-      'enterAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateY(100%)', opacity: 0 }),
-        animate('1000ms', style({ transform: 'translateX(0)', opacity: 1 }))
-      ]),
-      transition(':leave', [
-        style({ transform: 'translateX(0)', opacity: 1 }),
-        animate('1000ms', style({ transform: 'translateY(100%)', opacity: 0 }))
-      ])
-    ]
-    ),
+    // trigger(
+    //   'enterAnimation', [
+    //   transition(':enter', [
+    //     style({  opacity: 0 }),
+    //     animate('1000ms', style({  opacity: 1 }))
+    //   ]),
+    //   transition(':leave', [
+    //     style({ opacity: 1 }),
+    //     animate('400ms ease-out', style({ opacity: 0 }))
+    //   ])
+    // ]
+    // ),
     trigger(
       'enterAnimationx', [
       transition(':enter', [
@@ -44,14 +44,22 @@ export class PeliculaComponent implements OnInit {
 
   options: Observable<any>;
   options1: Observable<any>;
-  tipo= '';
+  status: boolean;
+  tipo = 'peliculas';
   titulo = 'Estadisticas Generales'
   grafo: boolean
   grafico = false;
   categorias = ['Comedia', 'Drama'];
   paises = ['USA', 'Italia'];
   directores = ['Tarantino', 'Juan'];
-  
+  temporadas = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+  duraciones = ['Menos de 30 min', '60 min', '90 min', 'Más de 90 min']
+  categoria;
+  pais;
+  tituloG1;
+  tituloG2;
+  ratings=[]
+  categories=[]
 
   colorScheme = {
     domain: ['#060529', '#B10606']
@@ -74,6 +82,9 @@ export class PeliculaComponent implements OnInit {
       fechafinal: new FormControl(null),
       duracion: new FormControl(null),
       director: new FormControl(null),
+      actor: new FormControl(null),
+      temporada: new FormControl(null),
+
     }
   );
 
@@ -82,9 +93,13 @@ export class PeliculaComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
+  ) 
+  {
+    // this.router.routeReuseStrategy.shouldReuseRoute = function () {
+    //   return false;
+    // };
 
-
-  ) { }
+  }
 
 
   @ViewChild('letters', { static: true })
@@ -103,13 +118,11 @@ export class PeliculaComponent implements OnInit {
   }
 
   onPelicula() {
-    sessionStorage.setItem('tipo', 'pelicula');
-    console.log(sessionStorage.getItem('tipo'))
+    sessionStorage.setItem('tipo', 'peliculas');
     this.router.navigate(['peliculas']);
   }
   onSerie() {
-    sessionStorage.setItem('tipo', 'serie');
-    console.log(sessionStorage.getItem('tipo'))
+    sessionStorage.setItem('tipo', 'series');
     this.router.navigate(['peliculas']);
 
   }
@@ -117,37 +130,82 @@ export class PeliculaComponent implements OnInit {
     this.router.navigate(['principal']);
   }
 
+  localStorage() {
+
+    if (sessionStorage.getItem('tipo') === 'peliculas')
+      return true
+    else
+      return false
+
+  }
 
   ngOnInit() {
+    this.categoria = sessionStorage.getItem('categoria');
+    this.pais = sessionStorage.getItem('pais');
+
+    this.titulo = `Grafico de ${this.categoria} en ${this.pais}`
+    this.tituloG1 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por años`
+    this.tituloG2 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por clasificación `
+
+    this.status = this.localStorage();
+    
+    this.categories = [
+      {
+        "name": "Comedia",
+        "value": 13
+      },
+      {
+        "name": "Drama",
+        "value": 44
+      },
+  
+    ];
+    this.ratings = [
+      {
+        "name": "TV7",
+        "value": 12
+      },
+      {
+        "name": "+18",
+        "value": 56
+      },
+  
+    ];
+  }
+
+  onGenerate() {
+    this.categoria = this.opcionesFormGroup.get('categoria').value;
+    this.pais = this.opcionesFormGroup.get('pais').value;
+    this.tipo = sessionStorage.getItem('tipo')
+    if (this.grafo == true) {
+      this.titulo = `Grafo de ${this.pais}`
+      this.leftToRigth();
+      this.Radial();
+    }
+    else {
+      this.titulo = `Grafico de ${this.categoria} en ${this.pais}`
+      this.tituloG1 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por años`
+      this.tituloG2 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por clasificación `
+
+
+    }
+  }
+
+  onFilter() {
+    let actor = this.filtrosFormGroup.get('actor').value;
+    let inicio = this.filtrosFormGroup.get('fechainicio').value;
+    let final = this.filtrosFormGroup.get('fechafinal').value;
+    let duracion = this.filtrosFormGroup.get('duracion').value;
+    let temporada = this.filtrosFormGroup.get('temporada').value;
+
+    console.log(actor,inicio,final,duracion,temporada)
+    
 
   }
-  OnGraph(){
-    this.leftToRigth();
-    this.Radial();
-  }
 
-  single = [
-    {
-      "name": "Series",
-      "value": 1240
-    },
-    {
-      "name": "Peliculas",
-      "value": 2000
-    },
 
-  ];
 
-  onSelect(data): void {
-    // if (data.name == 'Peliculas')
-    //   sessionStorage.setItem('tipo', 'pelicula');
 
-    // else
-    //   sessionStorage.setItem('tipo', 'serie');
-
-    // this.router.navigate(['peliculas']);
-
-  }
   leftToRigth(): void {
 
     let categoria = this.opcionesFormGroup.get('categoria').value;

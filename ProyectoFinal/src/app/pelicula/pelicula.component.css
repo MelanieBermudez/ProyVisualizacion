@@ -2,6 +2,7 @@
     width: 100%;
     height: 100%;
     font-family: 'Bebas Neue';
+
 }
 
 .header {
@@ -10,27 +11,25 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    position: fixed;
     width: 100vw;
     height: 100px;
     top: 0;
-    left: 0;
-    position: fixed;
+    left: 0; 
 }
 
 .title {
     display: flex;
     height: 100%;
-    width: 50%;
-    /* align-items: center; */
-    justify-content: center;
+    width: 25%;
 }
 
 .name {
     font-size: 60px;
-    width: 50%;
+    width: 100%;
     height: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .options {
@@ -39,18 +38,17 @@
     width: 50%;
     justify-content: flex-end;
     align-items: center;
-    /* font-size: px; */
 }
 
 .options-title {
     font-size: 25px;
     background-color: #B10606;
-    /* opacity: .25%; */
 }
 
 .body {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 100px);
+    max-height: calc(100vh - 100px);
     top: 100px;
     position: fixed;
     display: flex;
@@ -58,36 +56,39 @@
 }
 
 .sidebar {
-    background-color: #060529;
+    background-color:#060529;
     opacity: 80%;
     width: 250px;
     min-width: 250px;
     height: 100%;
+    max-height: 100%;
     color: white;
     display: flex;
     flex-direction: column;
-    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+.top-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 45%;
+    width: 100%;
 }
 
-.sidebar1 {
-    background-color: #060529;
+.above-menu {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50%;
     width: 100%;
-    padding: 10px;
+    overflow: auto;
 }
 
 .label {
     color: white !important;
-    /* width: 100%; */
-}
-
-.b {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    font-family: 'Bebas Neue';
+    
 }
 
 .form-field {
@@ -98,32 +99,37 @@
     background-color: #B10606;
     color: white;
     border-radius: 30px;
-    font-size: 25px;
+    font-size: 20px;
     width: 50%;
-    padding: 1px;
+
 }
 
-.top-menu {
+
+.div-form{
     display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: center;
-}
+    justify-content: center;
 
-.above-menu {
+}
+.div-button{
     display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: center;
-}
+    justify-content: center;
 
+}
 .menu-title {
     color: white;
+    height: 40px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: flex-start;
+    padding: 0%;
 }
 
 .main {
     color: #060529;
     width: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -162,9 +168,8 @@
 .main-header {
     display: flex;
     flex-direction: row;
-    /* height: 20px; */
+    height: 40px;
     color: #060529;
-    /* background-color: #060529; */
 }
 
 .graph {
@@ -179,8 +184,9 @@
 
 .chart {
     width: 100%;
+    height: 100%;
     overflow: scroll;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
     display: flex;
     flex-direction: column;
     align-items: center;

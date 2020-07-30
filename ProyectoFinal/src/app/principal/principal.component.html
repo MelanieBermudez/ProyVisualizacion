@@ -7,10 +7,6 @@
         <div class="options">
             <button mat-button class="options-title" (click)="onPelicula()">Peliculas</button>
             <button mat-button class="options-title" (click)="onSerie()">Series</button>
-            <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                <mat-button-toggle class="options-title" value="Peliculas">Peliculas</mat-button-toggle>
-                <mat-button-toggle class="options-title" value="Series">Series</mat-button-toggle>
-            </mat-button-toggle-group> -->
         </div>
     </div>
 
@@ -22,30 +18,27 @@
                 <div class="menu-title">
                     <H1>Opciones</H1>
                 </div>
-                <mat-form-field appearence="outline">
-                    <mat-label class="label">Categoria</mat-label>
-                    <mat-select>
-                        <mat-option value='pruba1'>
-                            pruba1
-                        </mat-option>
-                        <mat-option value='pruba3'>
-                            pruba3
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearence="outline">
-                    <mat-label class="label">Pais</mat-label>
-                    <mat-select>
-                        <mat-option value='pruba1'>
-                            pruba1
-                        </mat-option>
-                        <mat-option value='pruba3'>
-                            pruba3
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <button mat-button class="button">Generar</button>
-
+                <div class="div-form">
+                    <form [formGroup]="opcionesFormGroup">
+                        <mat-form-field class="form-field" appearence="outline">
+                            <mat-label class="label">Pais</mat-label>
+                            <mat-select formControlName="pais">
+                                <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="form-field" appearence="outline" *ngIf="!grafo">
+                            <mat-label class="label">Categoria</mat-label>
+                            <mat-select formControlName="categoria">
+                                <mat-option *ngFor="let categoria of categorias" [value]='categoria'>
+                                    {{categoria}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="div-button">
+                    <button mat-button class="button" (click)="onGenerate()">Generar</button>
+                </div>
             </div>
             <div class="above-menu" *ngIf="grafo">
                 <div class="menu-title">
@@ -112,9 +105,9 @@
 
                 <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
                     [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
-                </ngx-charts-pie-chart> 
+                </ngx-charts-pie-chart>
 
-   
+
 
             </div>
 

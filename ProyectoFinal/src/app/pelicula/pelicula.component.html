@@ -7,120 +7,105 @@
         <div class="options">
             <button mat-button class="options-title" (click)="onPelicula()">Peliculas</button>
             <button mat-button class="options-title" (click)="onSerie()">Series</button>
-
         </div>
     </div>
-
     <div class="body">
-
         <div class="sidebar">
-            <div class="top-menu">
+            <div class="top-menu" [@enterAnimation]>
                 <div class="menu-title">
-                    <H1>Opciones</H1>
+                    <span class="label">Opciones</span>
                 </div>
-                <form [formGroup]="opcionesFormGroup">
-                    <mat-form-field class="form-field" appearence="outline">
-                        <mat-label class="label">Categoria</mat-label>
-                        <mat-select formControlName="categoria">
-                            <mat-option *ngFor="let categoria of categorias" [value]='categoria'>
-                                {{categoria}}
-                            </mat-option>
-
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="form-field" appearence="outline">
-                        <mat-label class="label">Pais</mat-label>
-                        <mat-select formControlName="pais">
-                            <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais}}</mat-option>
-
-                        </mat-select>
-                    </mat-form-field>
-                </form>
-                <button mat-button class="button" (click)="OnGraph()">Generar</button>
+                <div class="div-form">
+                    <form [formGroup]="opcionesFormGroup">
+                        <mat-form-field class="form-field" appearence="outline">
+                            <mat-label class="label">Pais</mat-label>
+                            <mat-select formControlName="pais">
+                                <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="form-field" appearence="outline" *ngIf="!grafo">
+                            <mat-label class="label">Categoria</mat-label>
+                            <mat-select formControlName="categoria">
+                                <mat-option *ngFor="let categoria of categorias" [value]='categoria'>
+                                    {{categoria}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="div-button">
+                    <button mat-button class="button" (click)="onGenerate()">Generar</button>
+                </div>
             </div>
-            <div class="above-menu" *ngIf="grafo" [@enterAnimation]>
+            <div class="above-menu" *ngIf="!grafo" [@enterAnimation]>
                 <div class="menu-title">
-                    <H1>Filtros</H1>
+                    <span class="label">Filtros</span>
                 </div>
-                <!-- <div> -->
-                <form [formGroup]="filtrosFormGroup">
-                    <mat-accordion class="form">
-                        <mat-expansion-panel class="mat-elevation-z0 expansion" hideToggle>
-                            <mat-expansion-panel-header class="expansion">
-                                <mat-panel-title class="label"> Fechas </mat-panel-title>
-                            </mat-expansion-panel-header>
-                            <mat-form-field class="expansion">
-                                <mat-label class="label">Fecha inicio</mat-label>
-                                <input matInput formControlName="fechainicio" type="number">
-                            </mat-form-field>
-
-                            <mat-form-field class="expansion">
-                                <mat-label class="label">Fecha final</mat-label>
-                                <input matInput formControlName="fechafinal" type="number">
-                            </mat-form-field>
-                        </mat-expansion-panel>
-                    </mat-accordion>
-                    <!-- </div> -->
-                    <mat-form-field class="form-field" appearence="outline">
-                        <mat-label class="label">Duración</mat-label>
-                        <mat-select formControlName="duracion">
-                            <mat-option value='duracion'>{{duracion}}
-                            </mat-option>
-
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="form-field" appearence="outline">
-                        <mat-label class="label">Director</mat-label>
-                        <mat-select formControlName="director">
-                            <mat-option *ngFor="let director of directores" [value]="director">
-                                {{director}}
-                            </mat-option>
-
-                        </mat-select>
-                    </mat-form-field>
-                </form>
-                <button mat-button class="button">Filtrar</button>
-
-
-
+                <div class="div-form">
+                    <form [formGroup]="filtrosFormGroup">
+                        <mat-accordion class="form">
+                            <mat-expansion-panel class="mat-elevation-z0 expansion" hideToggle>
+                                <mat-expansion-panel-header class="expansion">
+                                    <mat-panel-title class="label"> Fechas </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <mat-form-field class="expansion">
+                                    <mat-label class="label">Año inicio</mat-label>
+                                    <input matInput formControlName="fechainicio" type="number">
+                                </mat-form-field>
+                                <mat-form-field class="expansion">
+                                    <mat-label class="label">Año final</mat-label>
+                                    <input matInput formControlName="fechafinal" type="number">
+                                </mat-form-field>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                        <mat-form-field class="form-field" appearence="outline" *ngIf="status">
+                            <mat-label class="label">Duración</mat-label>
+                            <mat-select formControlName="duracion">
+                                <mat-option *ngFor="let duracion of duraciones" [value]='duracion'>{{duracion}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="form-field" appearence="outline" *ngIf="!status">
+                            <mat-label class="label">Temporadas</mat-label>
+                            <mat-select formControlName="temporada">
+                                <mat-option *ngFor="let temporada of temporadas" [value]='temporada'>{{temporada}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="form-field" appearence="outline">
+                            <mat-label class="label">Actor</mat-label>
+                            <input matInput formControlName="actor" type="text">
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="div-button">
+                    <button mat-button class="button" (click)="onFilter()">Filtrar</button>
+                </div>
             </div>
-
-
-
-
         </div>
-
         <div class="main">
-
             <div class="main-header">
                 <span class="menu-title-g">{{titulo}}</span>
                 <div class="toggle">
-                    <span class="label-toggle">Grafos</span>
-                    <mat-slide-toggle (change)="toggle($event)"></mat-slide-toggle>
                     <span class="label-toggle">Graficos</span>
+                    <mat-slide-toggle (change)="toggle($event)"></mat-slide-toggle>
+                    <span class="label-toggle">Grafos</span>
                 </div>
             </div>
-
-            <div class="graph" *ngIf="!grafo" [@enterAnimationx]>
+            <div class="graph" *ngIf="grafo" [@enterAnimationx]>
                 <div echarts [options]="options | async" class="demo-chart"></div>
                 <div echarts [options]="options1 | async" [merge]='true' class="demo-chart"></div>
             </div>
-
-            <div class="chart" *ngIf="grafo" [@enterAnimationx]>
-
-                <h1>Cantidad de Peliculas por Categoria y pais</h1>
-                <ngx-charts-bar-horizontal [scheme]="colorScheme" class="grafico" [view]="view" [results]="single" 
-                      (select)="onSelect($event)">
-                </ngx-charts-bar-horizontal>
-                <h1>Promedio de ratings por Categoria y pais</h1>
-                <ngx-charts-number-card [scheme]="colorScheme" [view]="view" [results]="single" 
-                      (select)="onSelect($event)" class="grafico">
+            <div class="chart" *ngIf="!grafo" [@enterAnimationx]>
+                <h1>{{tituloG1}}</h1>
+                <ngx-charts-bar-vertical [scheme]="colorScheme" class="grafico" [view]="view" [results]="categories"
+                    (select)="onSelect($event)">
+                </ngx-charts-bar-vertical>
+                <h1>{{tituloG2}}</h1>
+                <ngx-charts-number-card [scheme]="colorScheme" [view]="view" [results]="ratings"
+                    (select)="onSelect($event)" class="grafico">
                 </ngx-charts-number-card>
-
             </div>
-
-
-
         </div>
     </div>
 </div>
