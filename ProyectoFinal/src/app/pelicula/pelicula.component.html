@@ -7,8 +7,10 @@
         <div class="options">
             <button mat-button class="options-title" (click)="onPelicula()">Peliculas</button>
             <button mat-button class="options-title" (click)="onSerie()">Series</button>
+
         </div>
     </div>
+
     <div class="body">
         <div class="sidebar">
             <div class="top-menu" [@enterAnimation]>
@@ -97,14 +99,34 @@
                 <div echarts [options]="options1 | async" [merge]='true' class="demo-chart"></div>
             </div>
             <div class="chart" *ngIf="!grafo" [@enterAnimationx]>
-                <h1>{{tituloG1}}</h1>
-                <ngx-charts-bar-vertical [scheme]="colorScheme" class="grafico" [view]="view" [results]="categories"
-                    (select)="onSelect($event)">
-                </ngx-charts-bar-vertical>
-                <h1>{{tituloG2}}</h1>
-                <ngx-charts-number-card [scheme]="colorScheme" [view]="view" [results]="ratings"
-                    (select)="onSelect($event)" class="grafico">
-                </ngx-charts-number-card>
+                <div class="charts">
+                    <div class="single-chart">
+                        <h1 class="chart-title">{{tituloG1}}</h1>
+                        <ngx-charts-bar-vertical [scheme]="colorScheme" [view]="view" [results]="categories"
+                            [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
+                            [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+                            [showDataLabel]="showDataLabel" class="grafico">
+                        </ngx-charts-bar-vertical>
+                    </div>
+
+                    <div class="single-chart">
+                        <h1 class="chart-title">{{tituloG2}}</h1>
+                        <ngx-charts-number-card [scheme]="colorScheme" [view]="view" [results]="ratings"
+                            class="grafico">
+                        </ngx-charts-number-card>
+                    </div>
+                </div>
+
+                <div class="chart-filters">
+                    <h1>Filtrado por:</h1>
+                    <ul>
+                        <li>Fechas</li>
+                        <li>Duración</li>
+                        <li>Actor</li>
+                    </ul>
+                </div>
+
+
             </div>
         </div>
     </div>

@@ -132,7 +132,6 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
 
 }
 
@@ -169,7 +168,7 @@
     display: flex;
     flex-direction: row;
     height: 40px;
-    color: #060529;
+    color: #060529;    
 }
 
 .graph {
@@ -185,21 +184,65 @@
 .chart {
     width: 100%;
     height: 100%;
-    overflow: scroll;
-    /* margin-bottom: 100px; */
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
 }
 
-.grafico{
+.charts{
+    width: 80%;
+    overflow: scroll;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.sk{
+    background-color: #060529;
+}
+
+.chart ::-webkit-scrollbar {
+    display: none;
+}
+.chart-filters{
+    width: 20%;
+    height: 100%;
+    color:#060529 ;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center ;
+    font-size: large;
+}
+
+.grafico{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .demo-chart {
     height: 500px;
     padding: 100px;
 }
+
+.single-chart{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px;
+
+}
+
+.chart-title{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #060529;
+}
+
 
 ::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
     background-color: white !important;

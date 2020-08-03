@@ -65,10 +65,18 @@ export class PeliculaComponent implements OnInit {
     domain: ['#060529', '#B10606']
   };
 
-  view: any[] = [800, 400];
-  gradient: boolean = true;
-  showLabels: boolean = true;
-  isDoughnut: boolean = true;
+  view: any[] = [700, 400];
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Años';
+  showYAxisLabel = true;
+  yAxisLabel = 'Cantidad';
+  showDataLabel = true;
+  
+
 
   opcionesFormGroup = new FormGroup(
     {
@@ -86,8 +94,9 @@ export class PeliculaComponent implements OnInit {
       temporada: new FormControl(null),
 
     }
-  );
-
+  );  
+  
+ 
 
 
   constructor(
@@ -95,9 +104,10 @@ export class PeliculaComponent implements OnInit {
     private router: Router,
   ) 
   {
-    // this.router.routeReuseStrategy.shouldReuseRoute = function () {
-    //   return false;
-    // };
+ 
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
 
   }
 
@@ -123,6 +133,7 @@ export class PeliculaComponent implements OnInit {
   }
   onSerie() {
     sessionStorage.setItem('tipo', 'series');
+    console.log(sessionStorage.getItem('tipo'))
     this.router.navigate(['peliculas']);
 
   }
@@ -157,6 +168,22 @@ export class PeliculaComponent implements OnInit {
       {
         "name": "Drama",
         "value": 44
+      },
+      {
+        "name": "Caomedia",
+        "value": 14
+      },
+      {
+        "name": "Drsdama",
+        "value": 20
+      },
+      {
+        "name": "Comedsdia",
+        "value": 2
+      },
+      {
+        "name": "Dramads",
+        "value": 34
       },
   
     ];
@@ -210,14 +237,7 @@ export class PeliculaComponent implements OnInit {
 
     let categoria = this.opcionesFormGroup.get('categoria').value;
     let pais = this.opcionesFormGroup.get('pais').value;
-    // let director = this.opcionesFormGroup.get('director').value;
-    // // let duracion = this.opcionesFormGroup.get('duracion').value;
-    // let fechainicio = this.opcionesFormGroup.get('fechainicio').value;
-    // let fechafinal = this.opcionesFormGroup.get('fechafinal').value;
 
-    // console.log(categoria,pais,director,fechafinal,fechainicio);
-
-    console.log(sessionStorage.getItem('tipo'))
     this.options = this.http
       .get<any>('./assets/data.json', { responseType: 'json' })
       .pipe(

@@ -63,28 +63,13 @@
     color: white;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     align-content: center;
 }
 
-.sidebar1 {
-    background-color: #060529;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 10px;
-}
 
 .label {
     color: white !important;
-    /* width: 100%; */
-}
-
-.b {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    font-family: 'Bebas Neue';
 }
 
 .button {
@@ -100,16 +85,9 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    /* height: 20%; */
     align-items: center;
 }
 
-.above-menu {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: center;
-}
 
 .menu-title {
     color: white;
@@ -121,6 +99,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
 }
 
 .form {
@@ -133,27 +112,13 @@
     font-size: 40px;
 }
 
-.toggle {
-    width: 50%;
-    padding: 20px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.label-toggle {
-    color: #060529 !important;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 40px;
-}
-
 .main-header {
     display: flex;
     color: #060529;
     justify-content: center;
     align-items: center;
     height: 40px;
+    width: 100%;
 }
 
 .div-form{
@@ -168,31 +133,21 @@
 }
 .graph {
     width: 100%;
-    height: 100%;
     display: flex;
-    justify-content: center;
-    /* margin-bottom: 20px; */
-    /* overflow: auto; */
+    flex-direction: column;
+    overflow: auto;
 }
 
-.expansion {
-    background-color: #060529;
-    color: white;
-}
 
-.chart {
+
+.single-chart{
     width: 100%;
-    height: 100%;
-    /* height: 80%; */
-    overflow: scroll;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
 
-.demo-chart {
-    height: 500px;
-    margin: 50px;
-    padding: 200px;
 }
-
 .form-field {
     margin: 10px;
 }
@@ -214,21 +169,11 @@
     color: white;
 }
 
-:host /deep/ .mat-slide-toggle .mat-slide-toggle-bar {
-    background-color: #060529;
-}
-
-:host /deep/ .mat-slide-toggle .mat-slide-toggle-thumb {
-    background-color: #B10606;
-}
-
 /* width */
 
 ::-webkit-scrollbar {
     width: 8px;
 }
-
-/* Track */
 
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey;
@@ -241,3 +186,5 @@
     background: #B10606;
     border-radius: 10px;
 }
+
+

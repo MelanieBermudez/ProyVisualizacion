@@ -11,10 +11,8 @@
     </div>
 
     <div class="body">
-
         <div class="sidebar">
             <div class="top-menu">
-
                 <div class="menu-title">
                     <H1>Opciones</H1>
                 </div>
@@ -40,55 +38,6 @@
                     <button mat-button class="button" (click)="onGenerate()">Generar</button>
                 </div>
             </div>
-            <div class="above-menu" *ngIf="grafo">
-                <div class="menu-title">
-                    <H1>Filtros</H1>
-                </div>
-                <div>
-                    <mat-accordion class="form">
-                        <mat-expansion-panel class="mat-elevation-z0 expansion" hideToggle>
-                            <mat-expansion-panel-header class="expansion">
-                                <mat-panel-title class="label"> Fechas </mat-panel-title>
-                            </mat-expansion-panel-header>
-                            <form>
-                                <mat-form-field class="expansion">
-                                    <mat-label class="label">Fecha inicio</mat-label>
-                                    <input matInput type="number">
-                                </mat-form-field>
-
-                                <mat-form-field class="expansion">
-                                    <mat-label class="label">Fecha final</mat-label>
-                                    <input matInput type="hide">
-                                </mat-form-field>
-                            </form>
-                        </mat-expansion-panel>
-                    </mat-accordion>
-                </div>
-                <mat-form-field appearence="outline">
-                    <mat-label class="label">Duración</mat-label>
-                    <mat-select>
-                        <mat-option value='pruba1'>
-                            pruba1
-                        </mat-option>
-                        <mat-option value='pruba3'>
-                            pruba3
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearence="outline">
-                    <mat-label class="label">Director</mat-label>
-                    <mat-select>
-                        <mat-option value='pruba1'>
-                            pruba1
-                        </mat-option>
-                        <mat-option value='pruba3'>
-                            pruba3
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <button mat-button class="button">Filtrar</button>
-
-            </div>
 
 
 
@@ -96,16 +45,34 @@
         </div>
 
         <div class="main">
-
             <div class="main-header">
                 <span class="menu-title-g">{{titulo}}</span>
             </div>
-
             <div class="graph">
+                <div class="single-chart">
+                    <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+                        [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
+                    </ngx-charts-pie-chart>
+                </div>
+                <div class="single-chart">
+                    <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+                        [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
+                    </ngx-charts-pie-chart>
+                </div>
+                <div class="single-chart">
+                    <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+                        [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
+                    </ngx-charts-pie-chart>
+                </div>
 
-                <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
-                    [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
-                </ngx-charts-pie-chart>
+
+
+
+
+
+
+
+
 
 
 
