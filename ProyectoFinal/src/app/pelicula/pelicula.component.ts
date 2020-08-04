@@ -94,11 +94,7 @@ export class PeliculaComponent implements OnInit {
       temporada: new FormControl(null),
 
     }
-  );  
-  
- 
-
-
+  ); 
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -210,6 +206,7 @@ export class PeliculaComponent implements OnInit {
       this.Radial();
     }
     else {
+
       this.titulo = `Grafico de ${this.categoria} en ${this.pais}`
       this.tituloG1 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por años`
       this.tituloG2 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por clasificación `
@@ -237,6 +234,8 @@ export class PeliculaComponent implements OnInit {
 
     let categoria = this.opcionesFormGroup.get('categoria').value;
     let pais = this.opcionesFormGroup.get('pais').value;
+
+    console.log(pais);
 
     this.options = this.http
       .get<any>('./assets/data.json', { responseType: 'json' })
