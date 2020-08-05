@@ -56,18 +56,17 @@
                         [gradient]="gradient" [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
                     </ngx-charts-pie-chart>
                 </div>
+
                 <div class="single-chart">
                     <h1 class="chart-title">Cantidad de producciones por categoría</h1>
                     <ngx-charts-tree-map [view]="viewTree" [scheme]="colorScheme1" [results]="totalcategorias"
-                        [gradient]="gradient" [animations]="animations" [labelFormatting]="labelFormatting"
-                        (select)="onSelect($event)">
+                        [gradient]="gradient" [animations]="animations" [labelFormatting]="labelFormatting">
                     </ngx-charts-tree-map>
 
                 </div>
                 <div class="single-chart">
                     <h1 class="chart-title">Top 20 de países con mayor producción</h1>
-                    <ngx-charts-number-card [scheme]="colorScheme" [view]="viewTree" [results]="totalpaises"
-                        (select)="onSelect($event)">
+                    <ngx-charts-number-card [scheme]="colorScheme" [view]="viewTree" [results]="totalpaises">
                     </ngx-charts-number-card>
                 </div>
                 <div class="single-chart">

@@ -75,21 +75,29 @@ router.get('/ObtenerYearTotal', function(req, res, next) {
 })
 
 //GRAFICOS FILTROS 
+// Meter inicio y final
 router.post('/ObtenerClasificacionFil', function(req, res, next) {
-    console.log(req.body);
-    db.mysqlConnection.query('CALL  ObtenerClasificacionFil(?,?,?,?,?)', [req.body.tipo,  req.body.pais,req.body.categoria, req.body.duracion,req.body.actor],(err, row, fields) => {
+    db.mysqlConnection.query('CALL  ObtenerClasificacionFil(?,?,?,?,?)', [req.body.tipo,  req.body.categoria,req.body.pais, req.body.duracion,req.body.actor],(err, row, fields) => {
         if (!err)
             res.send(row);
         else
             console.log(err);
     })
 })
-
+// Meter inicio y final
 router.post('/ObtenerYearFil', function(req, res, next) {
-    db.mysqlConnection.query('CALL  ObtenerYearFil(?,?,?,?,?)', [req.body.tipo, req.body.pais, req.body.categoria, req.body.duracion,req.body.actor],(err, row, fields) => {
-        if (!err){
+    db.mysqlConnection.query('CALL  ObtenerYearFil(?,?,?,?,?)', [req.body.tipo, req.body.categoria, req.body.pais, req.body.duracion,req.body.actor],(err, row, fields) => {
+        if (!err)
             res.send(row);
-            console.log(row[0]);}
+        else
+            console.log(err);
+    })
+})
+router.post('/ObtenerTituloYear', function(req, res, next) {
+
+    db.mysqlConnection.query('CALL  ObtenerTituloYear(?,?,?,?,?,?)', [req.body.tipo, req.body.categoria, req.body.pais, req.body.duracion,req.body.actor, req.body.fecha],(err, row, fields) => {
+        if (!err)
+            res.send(row);
         else
             console.log(err);
     })

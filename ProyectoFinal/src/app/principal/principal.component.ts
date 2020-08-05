@@ -132,25 +132,31 @@ export class PrincipalComponent implements OnInit {
   ngOnInit() {
     console.log( sessionStorage.getItem('tipo') );
 
-
     this.http.get<any>('/router/ObtenerTipoTotal').subscribe(
       (respost) => {
         this.totaltipos = respost[0]
+        console.log("this.totaltipos");
+        console.log(this.totaltipos);
       },
     );
     this.http.get<any>('/router/ObtenerCategoriasTotal').subscribe(
       (respost) => {
         this.totalcategorias= respost[0]
+        console.log("this.totalcategorias");
+        console.log(this.totalcategorias);
       },
     );
     this.http.get<any>('/router/ObtenerPaisTotal').subscribe(
       (respost) => {
         this.totalpaises= respost[0]
+        console.log("this.totalpaises")
+        console.log(this.totalpaises)
       },
     );
     this.http.get<any>('/router/ObtenerYearTotal').subscribe(
       (respost) => {
         this.totalfechas= respost[0]
+        console.log("this.totalfechas");
         console.log(this.totalfechas);
       },
     );

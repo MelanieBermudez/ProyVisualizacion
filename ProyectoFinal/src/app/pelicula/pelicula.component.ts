@@ -21,8 +21,8 @@ import { ThrowStmt } from '@angular/compiler';
     trigger(
       'enterAnimation', [
       transition(':enter', [
-        style({  opacity: 0 }),
-        animate('1000ms', style({  opacity: 1 }))
+        style({ opacity: 0 }),
+        animate('1000ms', style({ opacity: 1 }))
       ]),
       transition(':leave', [
         style({ opacity: 1 }),
@@ -53,19 +53,20 @@ export class PeliculaComponent implements OnInit {
   paises = [];
   directores = ['Tarantino', 'Juan'];
   temporadas = ['1 Season', '2 Seasons', '3 Seasons', '4 Seasons', '5 Seasons', '6 Seasons', '7 Seasons', '8 Seasons', '9 Seasons']
-  duraciones = ['Menos de 30 min', '60 min', '90 min', 'Más de 90 min']
+  duraciones = ['30', '60', '90', '100']
   tituloG1;
   tituloG2;
-  ratings=[]
-  categories=[]
-  
+  ratings = []
+  categories = []
+
   tipo: string = 'Movie';
-  categoria: string ='Spain';
-  pais: string ='Comedies';
-  duracion: string ='100';
-  actor: string ='Brad Pitt';
-  inicio=''
-  final=''
+  categoria: string = 'Comedies';
+  pais: string = 'Spain';
+  duracion: string = '';
+  actor: string = '';
+  inicio = ''
+  final = ''
+  temporada = ''
 
 
 
@@ -83,7 +84,7 @@ export class PeliculaComponent implements OnInit {
   showYAxisLabel = true;
   yAxisLabel = 'Cantidad';
   showDataLabel = true;
-  
+
 
 
   opcionesFormGroup = new FormGroup(
@@ -102,13 +103,12 @@ export class PeliculaComponent implements OnInit {
       temporada: new FormControl(null),
 
     }
-  ); 
+  );
   constructor(
     private http: HttpClient,
     private router: Router,
-  ) 
-  {
- 
+  ) {
+
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
@@ -156,26 +156,39 @@ export class PeliculaComponent implements OnInit {
 
   ngOnInit() {
     this.status = this.localStorage();
-    
 
-    this.tipo= sessionStorage.getItem('tipo');
-    this.http.post<any>('/router/ObtenerPaisesInit',{tipo:this.tipo}).subscribe(
+
+    this.tipo = sessionStorage.getItem('tipo');
+    this.http.post<any>('/router/ObtenerPaisesInit', { tipo: this.tipo }).subscribe(
       (respost) => {
-        this.paises= respost[0];
+        this.paises = respost[0];
       },
-      );
-    this.http.post<any>('/router/ObtenerCategoriasInit',{tipo:this.tipo}).subscribe(
+    );
+    this.http.post<any>('/router/ObtenerCategoriasInit', { tipo: this.tipo }).subscribe(
       (respost) => {
-        this.categorias= respost[0];
+        this.categorias = respost[0];
       },
-      );
-      
-     this.graficar();
+    );
+
+    this.graficar();
+  }
+
+  resetFilters() {
+
+    this.actor = '',
+      this.duracion = '',
+      this.temporada = '',
+      this.inicio = '';
+    this.final = '';
+    let temporada = '';
+    let duracion = '';
   }
 
   onGenerate() {
- 
+
     this.tipo = sessionStorage.getItem('tipo')
+
+    this.resetFilters();
 
     if (this.grafo == true) {
       this.titulo = `Grafo de ${this.pais}`
@@ -186,11 +199,8 @@ export class PeliculaComponent implements OnInit {
 
       this.categoria = this.opcionesFormGroup.get('categoria').value.categoria.toString();
       this.pais = this.opcionesFormGroup.get('pais').value.pais.toString();
-      
-      // this.actor = this.filtrosFormGroup.get('actor').value;
-      // this.duracion = this.filtrosFormGroup.get('duracion').value;
-      // this.inicio = this.filtrosFormGroup.get('fechainicio').value;
-      // this.final = this.filtrosFormGroup.get('fechafinal').value;
+
+
 
 
       this.titulo = `Grafico de ${this.categoria} en ${this.pais}`
@@ -201,56 +211,103 @@ export class PeliculaComponent implements OnInit {
     }
   }
 
-  graficar(){
+  graficar() {
 
 
-    const formData={
+    const formData = {
       tipo: this.tipo,
-      categoria:this.categoria,
-      pais:this.pais,
-      duracion:this.duracion,
-      actor:this.actor
-      
+      categoria: this.categoria,
+      pais: this.pais,
+      duracion: this.duracion,
+      actor: this.actor,
+      inicio: this.inicio,
+      final: this.final
+
     }
-    
+
     console.log(formData);
 
-    this.http.post<any>('/router/ObtenerYearFil',formData).subscribe(
+    this.http.post<any>('/router/ObtenerYearFil', formData).subscribe(
       (respost) => {
-        this.categories= respost[0];
-        console.log("this.categories");
-        console.log(this.categories);
+        this.categories = respost[0];
       },
-      );
-      
-      this.http.post<any>('/router/ObtenerClasificacionFil',formData).subscribe(
-        (respost) => {
-          this.ratings= respost[0]
-          console.log("this.ratings");
-          console.log(this.ratings);
-        },
-      );
+    );
 
-      this.titulo = `Grafico de ${this.categoria} en ${this.pais}`
-      this.tituloG1 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por años`
-      this.tituloG2 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por clasificación `
-  
+    this.http.post<any>('/router/ObtenerClasificacionFil', formData).subscribe(
+      (respost) => {
+        this.ratings = respost[0]
+
+      },
+    );
+
+    this.titulo = `Grafico de ${this.categoria} en ${this.pais}`
+    this.tituloG1 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por años`
+    this.tituloG2 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por clasificación `
+
 
   }
   onFilter() {
-    // let actor = this.filtrosFormGroup.get('actor').value;
-    // let inicio = this.filtrosFormGroup.get('fechainicio').value;
-    // let final = this.filtrosFormGroup.get('fechafinal').value;
-    // let duracion = this.filtrosFormGroup.get('duracion').value;
-    // let temporada = this.filtrosFormGroup.get('temporada').value;
 
-    // console.log(actor,inicio,final,duracion,temporada)
-    
+    if (this.filtrosFormGroup.get('actor').value != null)
+      this.actor = this.filtrosFormGroup.get('actor').value;
+    else
+      this.actor = ''
+
+    this.duracion = this.filtrosFormGroup.get('duracion').value;
+
+
+
+    if (this.filtrosFormGroup.get('fechainicio').value != null && this.filtrosFormGroup.get('fechafinal').value != null) {
+      this.inicio = this.filtrosFormGroup.get('fechainicio').value.inicio;
+      this.final = this.filtrosFormGroup.get('fechafinal').value.final;
+    }
+    else
+    this.inicio =''
+    this.final =''
+
+
+
+
+
+    // let temporada = this.filtrosFormGroup.get('temporada').value;
+    // let duracion = this.filtrosFormGroup.get('duracion').value;
+
+
+
+    console.log("estoe ss un filtro");
+    console.log(this.actor, this.inicio, this.final, this.duracion, this.temporada)
+    this.graficar();
 
   }
 
 
+  titlesYear(event){
 
+    console.log(event.name);
+
+    const formData = {
+      tipo: this.tipo,
+      categoria: this.categoria,
+      pais: this.pais,
+      duracion: this.duracion,
+      actor: this.actor,
+      fecha: event.name
+
+
+    }
+
+    console.log(formData);
+
+    this.http.post<any>('/router/ObtenerTituloYear', formData).subscribe(
+      (respost) => {
+         let titles = respost[0];
+         console.log(titles)
+      },
+    );
+
+
+    
+  }
 
   leftToRigth(): void {
 
