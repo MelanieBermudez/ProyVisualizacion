@@ -15,20 +15,27 @@ db.mysqlConnection.connect((err) => {
 
 })
 
-//Cargar Datos
-router.post('/CargarDatos', (req, res) => {
-    db.mysqlConnection.query('CALL CargarDatos(?,?,?,?,?,?,?,?,?,?)', [req.body.type, req.body.title,req.body.director, req.body.cast, req.body.country, req.body.year, req.body.rate, req.body.duration,  req.body.descrip,req.body.listed], (err, row, fields) => {
-        if (!err) {
+router.post('/ObtenerPaisesInit', function(req, res, next) {
+    db.mysqlConnection.query('CALL ObtenerPaisesInit(?)', [req.body.tipo],
+    (err, row, fields) => {
+        if (!err)
             res.send(row);
-        } else
+        else
             console.log(err);
     })
 })
-
-
+router.post('/ObtenerCategoriasInit', function(req, res, next) {
+    db.mysqlConnection.query('CALL ObtenerCategoriasInit(?)', [req.body.tipo],
+    (err, row, fields) => {
+        if (!err)
+            res.send(row);
+        else
+            console.log(err);
+    })
+})
 //GRAFICOS  GENERALES
 //ObtenerTipo
-router.post('/ObtenerTipoTotal', function(req, res, next) {
+router.get('/ObtenerTipoTotal', function(req, res, next) {
     db.mysqlConnection.query('CALL ObtenerTipoTotal()', (err, row, fields) => {
         if (!err)
             res.send(row);
@@ -38,7 +45,7 @@ router.post('/ObtenerTipoTotal', function(req, res, next) {
 })
 
 //ObtenerCategorias
-router.post('/ObtenerCategoriasTotal', function(req, res, next) {
+router.get('/ObtenerCategoriasTotal', function(req, res, next) {
     db.mysqlConnection.query('CALL  ObtenerCategoriasTotal()', (err, row, fields) => {
         if (!err)
             res.send(row);
@@ -48,7 +55,7 @@ router.post('/ObtenerCategoriasTotal', function(req, res, next) {
 })
 
 //ObtenerPaisTotal
-router.post('/ObtenerPaisTotal', function(req, res, next) {
+router.get('/ObtenerPaisTotal', function(req, res, next) {
     db.mysqlConnection.query('CALL  ObtenerPaisTotal()', (err, row, fields) => {
         if (!err)
             res.send(row);
@@ -58,7 +65,7 @@ router.post('/ObtenerPaisTotal', function(req, res, next) {
 })
 
 //ObtenerYearTotal
-router.post('/ObtenerYearTotal', function(req, res, next) {
+router.get('/ObtenerYearTotal', function(req, res, next) {
     db.mysqlConnection.query('CALL  ObtenerYearTotal()', (err, row, fields) => {
         if (!err)
             res.send(row);
@@ -69,7 +76,8 @@ router.post('/ObtenerYearTotal', function(req, res, next) {
 
 //GRAFICOS FILTROS 
 router.post('/ObtenerClasificacionFil', function(req, res, next) {
-    db.mysqlConnection.query('CALL  ObtenerClasificacionFil(?,?,?,?,?)', [req.body.tipo, req.body.categoria, req.body.pais, req.body.duracion,req.body.actor],(err, row, fields) => {
+    console.log(req.body);
+    db.mysqlConnection.query('CALL  ObtenerClasificacionFil(?,?,?,?,?)', [req.body.tipo,  req.body.pais,req.body.categoria, req.body.duracion,req.body.actor],(err, row, fields) => {
         if (!err)
             res.send(row);
         else
@@ -78,9 +86,10 @@ router.post('/ObtenerClasificacionFil', function(req, res, next) {
 })
 
 router.post('/ObtenerYearFil', function(req, res, next) {
-    db.mysqlConnection.query('CALL  ObtenerYearFil(?,?,?,?,?)', [req.body.tipo, req.body.categoria, req.body.pais, req.body.duracion,req.body.actor],(err, row, fields) => {
-        if (!err)
+    db.mysqlConnection.query('CALL  ObtenerYearFil(?,?,?,?,?)', [req.body.tipo, req.body.pais, req.body.categoria, req.body.duracion,req.body.actor],(err, row, fields) => {
+        if (!err){
             res.send(row);
+            console.log(row[0]);}
         else
             console.log(err);
     })

@@ -1,8 +1,9 @@
 <div class="app">
     <div class="header">
         <div class="title" (click)="onPrincipal()">
-            <ngx-arc-text class="name" [text]="text" #letters>
-            </ngx-arc-text>
+            <!-- <ngx-arc-text class="name" [text]="text" #letters>
+            </ngx-arc-text> -->
+            <h1>Universo Netflix</h1>
         </div>
         <div class="options">
             <button mat-button class="options-title" (click)="onPelicula()">Peliculas</button>
@@ -22,14 +23,14 @@
                         <mat-form-field class="form-field" appearence="outline">
                             <mat-label class="label">Pais</mat-label>
                             <mat-select formControlName="pais">
-                                <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais}}</mat-option>
+                                <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais.pais}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field class="form-field" appearence="outline" *ngIf="!grafo">
                             <mat-label class="label">Categoria</mat-label>
                             <mat-select formControlName="categoria">
                                 <mat-option *ngFor="let categoria of categorias" [value]='categoria'>
-                                    {{categoria}}
+                                    {{categoria.categoria}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>

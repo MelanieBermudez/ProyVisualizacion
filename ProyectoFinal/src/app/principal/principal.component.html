@@ -5,7 +5,7 @@
             </ngx-arc-text>
         </div>
         <div class="options">
-            <button mat-button class="options-title" (click)="onPelicula()">Peliculas</button>
+            <button mat-button class="options-title" (click)="onPelicula()">Películas</button>
             <button mat-button class="options-title" (click)="onSerie()">Series</button>
         </div>
     </div>
@@ -19,13 +19,13 @@
                 <div class="div-form">
                     <form [formGroup]="opcionesFormGroup">
                         <mat-form-field class="form-field" appearence="outline">
-                            <mat-label class="label">Pais</mat-label>
+                            <mat-label class="label">País</mat-label>
                             <mat-select formControlName="pais">
                                 <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field class="form-field" appearence="outline" *ngIf="!grafo">
-                            <mat-label class="label">Categoria</mat-label>
+                            <mat-label class="label">Categoría</mat-label>
                             <mat-select formControlName="categoria">
                                 <mat-option *ngFor="let categoria of categorias" [value]='categoria'>
                                     {{categoria}}
@@ -50,20 +50,34 @@
             </div>
             <div class="graph">
                 <div class="single-chart">
-                    <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
-                        [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
+                    <h1 class="chart-title">Total de series y películas</h1>
+
+                    <ngx-charts-pie-chart [view]="viewTree" [scheme]="colorScheme" [results]="totaltipos"
+                        [gradient]="gradient" [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
                     </ngx-charts-pie-chart>
                 </div>
                 <div class="single-chart">
-                    <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
-                        [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
-                    </ngx-charts-pie-chart>
+                    <h1 class="chart-title">Cantidad de producciones por categoría</h1>
+                    <ngx-charts-tree-map [view]="viewTree" [scheme]="colorScheme1" [results]="totalcategorias"
+                        [gradient]="gradient" [animations]="animations" [labelFormatting]="labelFormatting"
+                        (select)="onSelect($event)">
+                    </ngx-charts-tree-map>
+
                 </div>
                 <div class="single-chart">
-                    <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
-                        [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
-                    </ngx-charts-pie-chart>
+                    <h1 class="chart-title">Top 20 de países con mayor producción</h1>
+                    <ngx-charts-number-card [scheme]="colorScheme" [view]="viewTree" [results]="totalpaises"
+                        (select)="onSelect($event)">
+                    </ngx-charts-number-card>
                 </div>
+                <div class="single-chart">
+                    <h1 class="chart-title">Cantidad de producciones por año</h1>
+                    <ngx-charts-pie-grid [view]="viewTree" [scheme]="colorScheme" [results]="totalfechas" [label]>
+                    </ngx-charts-pie-grid>
+
+                </div>
+
+
 
 
 

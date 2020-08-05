@@ -13,7 +13,7 @@ app.use(
 )
 
 //
-var Routes = require("./routes/Routes.js")
+var Routes = require("./routes/routes.js")
 app.use("/router",Routes)
 
 app.listen(port,function(){

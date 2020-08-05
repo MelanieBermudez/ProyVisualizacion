@@ -18,19 +18,22 @@ export class PrincipalComponent implements OnInit {
 
   options: Observable<any>;
 
-  titulo = 'Estadisticas Generales'
+  titulo = 'Estadísticas Generales'
   grafo: boolean
   grafico = false;
   categorias = ['Comedia', 'Drama'];
-  paises = ['USA', 'Italia'];
-
-
+  paises = ['United States', 'Italia'];
+  totaltipos= [];
+  totalcategorias=[];
+  totalpaises=[];
+  totalfechas=[];
   colorScheme = {
     domain: ['#060529', '#B10606']
   };
 
   view: any[] = [500, 400];
-  gradient: boolean = true;
+  viewNumbers: any[] = [1300, 800];
+  viewTree: any[] = [1000, 600];
   showLabels: boolean = true;
   isDoughnut: boolean = true;
 
@@ -61,24 +64,52 @@ export class PrincipalComponent implements OnInit {
     this.grafo = event.checked;
 
   }
-  single = [
-    {
-      "name": "Series",
-      "value": 1973
-    },
-    {
-      "name": "Peliculas",
-      "value": 4244
-    },
 
-  ];
+  showXAxis = true;
+  showYAxis = true;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Años';
+  showYAxisLabel = true;
+  yAxisLabel = 'Cantidad';
+  showDataLabel = true;
+  
 
+  animations: boolean = true;
+
+
+  
+  colorScheme1 = {
+    domain: [
+      '#335c67',
+      '#fff3b0',
+      '#9e2a2b',
+      '#540b0e',
+      '#001524',
+      '#15616d',
+      '#ffecd1',
+      '#003049',
+      '#78290f',
+      '#B10606',
+      
+    ]
+  };
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
   onSelect(data): void {
-    if (data.name == 'Peliculas')
-      sessionStorage.setItem('tipo', 'peliculas');
+    if (data.name == 'Películas')
+      sessionStorage.setItem('tipo', 'Movie');
 
     else
-      sessionStorage.setItem('tipo', 'series');
+      sessionStorage.setItem('tipo', 'TV Show');
 
     this.router.navigate(['peliculas']);
 
@@ -86,12 +117,12 @@ export class PrincipalComponent implements OnInit {
 
 
   onPelicula():any{
-    sessionStorage.setItem('tipo', 'peliculas');
+    sessionStorage.setItem('tipo', 'Movie');
     this.router.navigate(['peliculas']);
   }
   onSerie(){
     console.log("dasdas")
-    sessionStorage.setItem('tipo', 'series');
+    sessionStorage.setItem('tipo', 'TV Show');
     this.router.navigate(['peliculas']);
   }
 
@@ -99,7 +130,32 @@ export class PrincipalComponent implements OnInit {
     this.router.navigate(['principal']);
   }
   ngOnInit() {
-    console.log( sessionStorage.getItem('tipo') )
+    console.log( sessionStorage.getItem('tipo') );
+
+
+    this.http.get<any>('/router/ObtenerTipoTotal').subscribe(
+      (respost) => {
+        this.totaltipos = respost[0]
+      },
+    );
+    this.http.get<any>('/router/ObtenerCategoriasTotal').subscribe(
+      (respost) => {
+        this.totalcategorias= respost[0]
+      },
+    );
+    this.http.get<any>('/router/ObtenerPaisTotal').subscribe(
+      (respost) => {
+        this.totalpaises= respost[0]
+      },
+    );
+    this.http.get<any>('/router/ObtenerYearTotal').subscribe(
+      (respost) => {
+        this.totalfechas= respost[0]
+        console.log(this.totalfechas);
+      },
+    );
+
+
 
    }
 
