@@ -243,6 +243,18 @@
     color: #060529;
 }
 
+.filtros{
+    font-size: 35px;
+    display: flex;
+    width: 100%;
+    height: 40px;
+    justify-content: space-between;
+}
+
+.delete-img{
+    width: 40px;
+    height: 40px;
+}
 
 ::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
     background-color: white !important;

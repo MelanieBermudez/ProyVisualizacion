@@ -1,8 +1,9 @@
 <div class="app">
     <div class="header">
         <div class="title" (click)="onPrincipal()">
-            <ngx-arc-text class="name" [text]="text" #letters>
-            </ngx-arc-text>
+            <!-- <ngx-arc-text class="name" [text]="text" #letters>
+            </ngx-arc-text> -->
+            <h1>universon netflix</h1>
         </div>
         <div class="options">
             <button mat-button class="options-title" (click)="onPelicula()">Películas</button>
@@ -21,14 +22,14 @@
                         <mat-form-field class="form-field" appearence="outline">
                             <mat-label class="label">País</mat-label>
                             <mat-select formControlName="pais">
-                                <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais}}</mat-option>
+                                <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais.pais}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field class="form-field" appearence="outline" *ngIf="!grafo">
                             <mat-label class="label">Categoría</mat-label>
                             <mat-select formControlName="categoria">
                                 <mat-option *ngFor="let categoria of categorias" [value]='categoria'>
-                                    {{categoria}}
+                                    {{categoria.categoria}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -71,7 +72,7 @@
                 </div>
                 <div class="single-chart">
                     <h1 class="chart-title">Cantidad de producciones por año</h1>
-                    <ngx-charts-pie-grid [view]="viewTree" [scheme]="colorScheme" [results]="totalfechas" [label]>
+                    <ngx-charts-pie-grid [view]="viewNumbers" [scheme]="colorScheme" [results]="totalfechas" [label] class="piegrid">
                     </ngx-charts-pie-grid>
 
                 </div>

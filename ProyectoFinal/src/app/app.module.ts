@@ -21,6 +21,12 @@ import { PrincipalComponent } from './principal/principal.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import {MatDialogModule} from '@angular/material/dialog';
+import { TitleDialogComponent } from './title-dialog/title-dialog.component';
+
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 
 
@@ -29,7 +35,8 @@ import { RouterModule, Routes } from '@angular/router';
   declarations: [
     AppComponent,
     PeliculaComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    TitleDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,11 +58,14 @@ import { RouterModule, Routes } from '@angular/router';
     NgxChartsModule,
     ReactiveFormsModule,
     FormsModule,
-
     HttpClientModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule,
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [TitleDialogComponent]
 })
 export class AppModule { }

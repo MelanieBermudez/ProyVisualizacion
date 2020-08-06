@@ -23,13 +23,13 @@
                         <mat-form-field class="form-field" appearence="outline">
                             <mat-label class="label">Pais</mat-label>
                             <mat-select formControlName="pais">
-                                <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais.pais}}</mat-option>
+                                <mat-option *ngFor='let pais of paises' [value]='pais.pais'>{{pais.pais}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field class="form-field" appearence="outline" *ngIf="!grafo">
                             <mat-label class="label">Categoria</mat-label>
                             <mat-select formControlName="categoria">
-                                <mat-option *ngFor="let categoria of categorias" [value]='categoria'>
+                                <mat-option *ngFor="let categoria of categorias" [value]='categoria.categoria'>
                                     {{categoria.categoria}}
                                 </mat-option>
                             </mat-select>
@@ -106,8 +106,7 @@
                         <ngx-charts-bar-vertical [scheme]="colorScheme" [view]="view" [results]="categories"
                             [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
                             [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
-                            [showDataLabel]="showDataLabel" class="grafico"
-                            (select)="titlesYear($event)">
+                            [showDataLabel]="showDataLabel" class="grafico" (select)="titlesYear($event)">
                         </ngx-charts-bar-vertical>
                     </div>
 
@@ -121,11 +120,27 @@
 
                 <div class="chart-filters">
                     <h1>Filtrado por:</h1>
-                    <ul>
-                        <li>Fechas</li>
-                        <li>Duración</li>
-                        <li>Actor</li>
-                    </ul>
+
+                    <div class="filtros" *ngIf="showDuracion">
+                        {{filtroDuracion}}
+                        <div class="delete" (click)='deleteFilter(1)'>
+                            <img class="delete-img" src="assets/img/delete.png">
+                        </div>
+                    </div>
+
+                    <div class="filtros" *ngIf="showFechas">
+                        {{filtroFechas}}
+                        <div class="delete"  (click)='deleteFilter(2)'>
+                            <img class="delete-img" src="assets/img/delete.png">
+                        </div>
+                    </div>
+
+                    <div class="filtros" *ngIf="showActor">
+                        {{filtroActor}}
+                        <div class="delete" (click)='deleteFilter(3)'>
+                            <img class="delete-img" src="assets/img/delete.png">
+                        </div>
+                    </div>
                 </div>
 
 

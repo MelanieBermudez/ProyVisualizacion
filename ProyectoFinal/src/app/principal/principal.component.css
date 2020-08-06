@@ -22,9 +22,6 @@
     display: flex;
     height: 100%;
     width: 25%;
-
-
-
 }
 
 .name {
@@ -166,9 +163,19 @@
     margin: 10px;
 }
 
+.piegrid{
+    font-size: 200px;
+}
+
+  
+::ng-deep .pie-grid {
+    font-size: 29px !important;
+    color: red;
+}
 ::ng-deep .pie-label {
     font-size: 29px !important;
 }
+
 
 
 ::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
@@ -200,5 +207,7 @@
     background: #B10606;
     border-radius: 10px;
 }
+
+
 
 
