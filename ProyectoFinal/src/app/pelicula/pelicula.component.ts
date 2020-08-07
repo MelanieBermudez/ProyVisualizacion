@@ -55,7 +55,7 @@ export class PeliculaComponent implements OnInit {
   categorias = ['Comedia', 'Dramas', 'Comedies'];
   paises = [];
   directores = ['Tarantino', 'Juan'];
-  temporadas = ['1 Season', '2 Seasons', '3 Seasons', '4 Seasons', '5 Seasons', '6 Seasons', '7 Seasons', '8 Seasons', '9 Seasons']
+  temporadas = ['1', '2', '3', '4', '5', '6', '7 ', '8 ', '9 ']
   duraciones = ['30', '60', '90', '100']
   tituloG1;
   tituloG2;
@@ -268,19 +268,39 @@ export class PeliculaComponent implements OnInit {
 
     this.checkFilters();
 
+    if (this.duracion == null || this.duracion == '') {
+      this.duracion = '0';
+    }
+    if (this.inicio == null || this.inicio == '') {
+      this.inicio = '1925';
+    }
+    if (this.final == null || this.final == '') {
+      this.final = '2020';
+    }
+    if (this.temporada == null || this.temporada == '') {
+      this.temporada = '0';
+    }
+
+
+
+    console.log(this.duracion, this.inicio, this.final);
+
     const formData = {
       tipo: this.tipo,
       categoria: this.categoria,
       pais: this.pais,
       duracion: this.duracion,
       actor: this.actor,
-      inicio: this.inicio,
-      final: this.final
+      fechaI: this.inicio,
+      fechaF: this.final
 
     }
+
+    console.log(formData);
     this.http.post<any>('/router/ObtenerYearFil', formData).subscribe(
       (respost) => {
         this.categories = respost[0];
+        console.log(this.categories);
       },
     );
 
@@ -315,8 +335,9 @@ export class PeliculaComponent implements OnInit {
 
     // console.log(this.filtrosFormGroup.get('temporada').value );
     if (this.filtrosFormGroup.get('temporada').value != null) {
+      this.duracion = this.filtrosFormGroup.get('temporada').value;
       this.temporada = this.filtrosFormGroup.get('temporada').value;
-      this.duracion = ''
+      // this.duracion = ''
       this.showDuracion = true;
 
     }
@@ -335,28 +356,28 @@ export class PeliculaComponent implements OnInit {
 
   }
 
-  deleteFilter(type){
+  deleteFilter(type) {
 
     console.log(type);
-    if(type ==1){
+    if (type == 1) {
       console.log(1);
-      this.filtroDuracion=''
-      this.showDuracion=false
+      this.filtroDuracion = ''
+      this.showDuracion = false
       this.graficar();
 
     }
-    if(type==2){
+    if (type == 2) {
       console.log(2);
-      this.inicio=''
-      this.final=''
-      this.showFechas=false;
-       this.graficar();
+      this.inicio = ''
+      this.final = ''
+      this.showFechas = false;
+      this.graficar();
 
     }
-    if(type ==3){
+    if (type == 3) {
       console.log(3);
-      this.actor=''
-      this.showActor=false
+      this.actor = ''
+      this.showActor = false
       this.graficar();
 
     }
@@ -385,10 +406,20 @@ export class PeliculaComponent implements OnInit {
 
   leftToRigth(): void {
 
+    let arbol = []
+
     let categoria = this.opcionesFormGroup.get('categoria').value;
     let pais = this.opcionesFormGroup.get('pais').value;
 
     console.log(pais);
+
+    this.http.post<any>('/router/ObtenerPaisCategArbol', { tipo: 'Movie', pais: 'Mexico' }).subscribe(
+      (respost) => {
+        arbol = respost;
+        console.log('arbol')
+        console.log(arbol)
+      },
+    );
 
     this.options = this.http
       .get<any>('./assets/data.json', { responseType: 'json' })
@@ -406,7 +437,7 @@ export class PeliculaComponent implements OnInit {
             series: [
               {
                 type: 'tree',
-                data: [data],
+                data: [arbol[0]],
                 top: '1%',
                 left: '7%',
                 bottom: '1%',
@@ -440,9 +471,17 @@ export class PeliculaComponent implements OnInit {
 
     let categoria = this.opcionesFormGroup.get('categoria').value;
     let pais = this.opcionesFormGroup.get('pais').value;
+    let arbol = []
+    this.http.post<any>('/router/ObtenerPaisCategArbol', { tipo: 'Movie', pais: 'Mexico' }).subscribe(
+      (respost) => {
+        arbol = respost;
+        console.log('arbol')
+        console.log(arbol)
+      },
+    );
 
-    this.options1 = this.http
-      .get<any>('./assets/data.json', { responseType: 'json' })
+
+    this.options1 = this.http.post<any>('/router/ObtenerPaisCategArbol', { tipo: 'Movie', pais: 'Mexico' })
       .pipe(
         map((data) => {
           echarts.util.each(
@@ -457,12 +496,12 @@ export class PeliculaComponent implements OnInit {
             series: [
               {
                 type: 'tree',
-                data: [data],
+                data: [arbol[0]],
                 top: '1%',
                 left: '7%',
                 bottom: '1%',
                 right: '20%',
-                symbolSize: 7,
+                symbolSize: 9,
                 label: {
                   position: 'left',
                   verticalAlign: 'middle',

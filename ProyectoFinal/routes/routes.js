@@ -185,6 +185,7 @@ router.post('/ObtenerPaisCategArbol', function(req, res, next) {
                 for(q = 0; q <listatitulocat.length; q++){
                     if(consulta[p]['categoria'] == listacategorias[q]){
                         listaelenco[q].push(consulta[p]['director'])
+                        //aqui se puede cambiar por elenco
                     }
 
                 }
@@ -194,8 +195,9 @@ router.post('/ObtenerPaisCategArbol', function(req, res, next) {
             var t = 0,u=0,v=0
             for (t = 0; t <listacategorias.length; t++) {
                 for (u= 0; u <listatitulocat[t].length; u++){
-                    
-                    arbolData[0]['children'][t]['children'][u]['children'].push(listaelenco[t][u])
+                    // arbolData[0]['children'][m]['children'].push({name:listatitulocat[m][n],children:[]})
+
+                    arbolData[0]['children'][t]['children'][u]['children'].push({name:listaelenco[t][u]})
                      
                 }
             }            
