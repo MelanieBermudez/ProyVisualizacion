@@ -2,7 +2,6 @@
     width: 100%;
     height: 100%;
     font-family: 'Bebas Neue';
-
 }
 
 .header {
@@ -15,7 +14,7 @@
     width: 100vw;
     height: 100px;
     top: 0;
-    left: 0; 
+    left: 0;
 }
 
 .title {
@@ -45,6 +44,20 @@
     background-color: #B10606;
 }
 
+.typeSelected {
+    font-size: 25px;
+    background-color: #B10606;
+    color: white;
+    box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    border: 1px solid #ffffff;
+}
+
+.typeUnSelected {
+    font-size: 25px;
+    background-color: #B10606;
+    color: white;
+}
+
 .body {
     width: 100%;
     height: calc(100% - 100px);
@@ -56,7 +69,7 @@
 }
 
 .sidebar {
-    background-color:#060529;
+    background-color: #060529;
     opacity: 80%;
     width: 250px;
     min-width: 250px;
@@ -67,8 +80,8 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-
 }
+
 .top-menu {
     display: flex;
     flex-direction: column;
@@ -88,7 +101,6 @@
 
 .label {
     color: white !important;
-    
 }
 
 .form-field {
@@ -101,20 +113,18 @@
     border-radius: 30px;
     font-size: 20px;
     width: 50%;
-
 }
 
-
-.div-form{
+.div-form {
     display: flex;
     justify-content: center;
-
 }
-.div-button{
+
+.div-button {
     display: flex;
     justify-content: center;
-
 }
+
 .menu-title {
     color: white;
     height: 40px;
@@ -129,10 +139,8 @@
 .main {
     color: #060529;
     width: 100%;
-
     display: flex;
     flex-direction: column;
-
 }
 
 .form {
@@ -141,11 +149,11 @@
 
 .menu-title-g {
     color: #060529;
-    width: 50%;
+    width: 70%;
     display: flex;
     font-size: 40px;
     align-items: center;
-    height: 100%;
+    height: 50px;
     padding-left: 10px;
 }
 
@@ -168,12 +176,14 @@
     display: flex;
     flex-direction: row;
     height: 40px;
-    color: #060529;    
+    color: #060529;
 }
 
 .graph {
     width: 100%;
     overflow: scroll;
+    /* height: 1000px; */
+    /* background-color: #060529; */
 }
 
 .expansion {
@@ -190,52 +200,41 @@
     align-items: center;
 }
 
-.charts{
+.charts {
     width: 80%;
     overflow: scroll;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
-.sk{
-    background-color: #060529;
-}
 
 .chart ::-webkit-scrollbar {
     display: none;
 }
-.chart-filters{
-    width: 20%;
-    height: 100%;
-    color:#060529 ;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content:center ;
-    font-size: large;
-}
 
-.grafico{
+.grafico {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
+.titulo{
+    font-size: 50px;
+}
 .demo-chart {
-    height: 500px;
+    height: 1200px;
     padding: 100px;
 }
 
-.single-chart{
+.single-chart {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 35px;
-
 }
 
-.chart-title{
+.chart-title {
     width: 100%;
     display: flex;
     align-items: center;
@@ -243,7 +242,19 @@
     color: #060529;
 }
 
-.filtros{
+.chart-filters {
+    width: 20%;
+    height: 80%;
+    color: #060529;
+    flex-wrap: wrap;
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: large;
+}
+
+.filtros {
     font-size: 35px;
     display: flex;
     width: 100%;
@@ -251,9 +262,9 @@
     justify-content: space-between;
 }
 
-.delete-img{
-    width: 40px;
-    height: 40px;
+.delete-img {
+    width: 30px;
+    height: 30px;
 }
 
 ::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {

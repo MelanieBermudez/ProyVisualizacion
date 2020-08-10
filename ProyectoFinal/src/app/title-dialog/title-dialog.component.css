@@ -1,40 +1,40 @@
-
 .cuerpo {
     width: 60vw;
     height: 50vh;
     overflow: auto;
     /* background-color:rgba(2, 2, 16, .4) ; */
-
 }
 
 .example-card {
     max-width: 400px;
     max-height: 300px;
-    background-color:rgba(2, 2,  16, .2) ;   
-    
+    /* height: 100px; */
+    background-color: rgba(2, 2, 16, .2);
+    overflow: hidden;
 }
+
 .example-card ::-webkit-scrollbar {
     width: 3px;
-  }
+}
+.example-card ::-webkit-scrollbar-track {
+    display: none;
+}
 
-
-  ::ng-deep .mat-card-header-text {
-    margin: 4px; 
+::ng-deep .mat-card-header-text {
+    margin: 4px;
     width: 100%;
-  }
+}
+
 .title {
-color: #B10606;
+    color: #B10606;
 }
 
-.descripcion{
+.descripcion {
     color: #060529;
-    /* overflow: hidden; */
 }
-
-
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 /* Track */

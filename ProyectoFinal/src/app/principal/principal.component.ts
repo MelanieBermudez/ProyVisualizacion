@@ -178,9 +178,9 @@ export class PrincipalComponent implements OnInit {
     console.log(categori);
     sessionStorage.setItem('categoria', categori);
     sessionStorage.setItem('pais', pai);
+    sessionStorage.setItem('tipo', 'Movie');
 
 
-    // this.tipo = sessionStorage.getItem('tipo')
     this.router.navigate(['peliculas']);
 
 

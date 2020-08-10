@@ -105,8 +105,10 @@ router.post('/ObtenerTituloYear', function(req, res, next) {
 
 router.post('/ObtenerTituloClasificacion', function(req, res, next) {
     db.mysqlConnection.query('CALL ObtenerTituloClasificacion(?,?,?,?,?,?,?,?)', [req.body.tipo, req.body.categoria, req.body.pais, req.body.duracion,req.body.actor, req.body.fechaI, req.body.fechaF, req.body.clasificacion],(err, row, fields) => {
-        if (!err)
+        if (!err){''
             res.send(row);
+        }
+
         else
             console.log(err);
     })

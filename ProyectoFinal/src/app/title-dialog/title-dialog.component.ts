@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA} from '@angular/material';
+import { PeliculaComponent } from '../pelicula/pelicula.component';
 
 @Component({
   selector: 'app-title-dialog',
@@ -11,46 +12,19 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 export class TitleDialogComponent implements OnInit {
 
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    public dialogRef: MatDialogRef<PeliculaComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any ) { }
 
-  titles = ['Juan'];
+  titles = [];
   names;
-  descripcion=[" max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px; max-height: 200px;"]
+  descripcion = []
+
+  
 
   ngOnInit() {
 
-    let form = JSON.parse(sessionStorage.getItem('moviesTitles'))
-
-    //  console.log(JSON.parse(form));
-
-    let tipo = form["tipo"]
-    let categoria = form["categoria"]
-    let pais = form["pais"]
-    let duracion = form["duracion"]
-    let actor = form["actor"]
-    let fecha = form["fecha"]
-
-    const formData = {
-      tipo: tipo,
-      categoria: categoria,
-      pais: pais,
-      duracion: duracion,
-      actor: actor,
-      fecha: fecha
-
-
-    }
-
-
-
-    this.http.post<any>('/router/ObtenerTituloYear', formData).subscribe(
-      (respost) => {
-        this.titles = respost[0]; 
-      },
-    );
-
-
+    this.titles=this.data['data'];
 
   }
 

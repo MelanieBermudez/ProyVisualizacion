@@ -1,13 +1,13 @@
 <div class="app">
     <div class="header">
         <div class="title" (click)="onPrincipal()">
-            <!-- <ngx-arc-text class="name" [text]="text" #letters>
-            </ngx-arc-text> -->
-            <h1>Universo Netflix</h1>
+            <h1 class="titulo">Universo Netflix</h1>
         </div>
         <div class="options">
-            <button mat-button class="options-title" (click)="onPelicula()">Peliculas</button>
-            <button mat-button class="options-title" (click)="onSerie()">Series</button>
+            <button mat-button [ngClass]="ButtonType ? 'typeSelected' : 'typeUnSelected' "
+                (click)="onPelicula()">Peliculas</button>
+            <button mat-button [ngClass]="!ButtonType ? 'typeSelected' : 'typeUnSelected'"
+                (click)="onSerie()">Series</button>
 
         </div>
     </div>
@@ -112,8 +112,8 @@
 
                     <div class="single-chart">
                         <h1 class="chart-title">{{tituloG2}}</h1>
-                        <ngx-charts-number-card [scheme]="colorScheme" [view]="view" [results]="ratings"
-                            class="grafico">
+                        <ngx-charts-number-card [scheme]="colorScheme" [view]="view" [results]="ratings" class="grafico"
+                            (select)="titlesClasification($event)">
                         </ngx-charts-number-card>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
 
                     <div class="filtros" *ngIf="showFechas">
                         {{filtroFechas}}
-                        <div class="delete"  (click)='deleteFilter(2)'>
+                        <div class="delete" (click)='deleteFilter(2)'>
                             <img class="delete-img" src="assets/img/delete.png">
                         </div>
                     </div>
