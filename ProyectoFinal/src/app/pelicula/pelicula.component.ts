@@ -49,7 +49,7 @@ export class PeliculaComponent implements OnInit {
   options: Observable<any>;
   options1: Observable<any>;
   status: boolean;
-  titulo = 'Estadisticas Generales'
+  titulo = 'General data'
   grafo: boolean
   grafico = false;
   categorias = [];
@@ -93,9 +93,9 @@ export class PeliculaComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Años';
+  xAxisLabel = 'Years';
   showYAxisLabel = true;
-  yAxisLabel = 'Cantidad';
+  yAxisLabel = 'Quantity';
   showDataLabel = true;
 
 
@@ -210,13 +210,13 @@ export class PeliculaComponent implements OnInit {
     if (this.tipo == 'Movie') {
       this.ButtonType = true;
       if (this.duracion != null || this.duracion != '') {
-        this.filtroDuracion = `Peliculas  mayores a ${this.duracion} minutos`;
+        this.filtroDuracion = `Movies more than ${this.duracion} minutes`;
       }
     }
     else {
       this.ButtonType = false;
       if (this.temporada != null || this.temporada != '') {
-        this.filtroDuracion = `Series  mayores a ${this.temporada}`;
+        this.filtroDuracion = `TV Shows more than ${this.temporada} seasons`;
       }
     }
 
@@ -226,7 +226,7 @@ export class PeliculaComponent implements OnInit {
     }
     if (this.inicio != null || this.inicio != '' && this.final != null || this.final != '') {
 
-      this.filtroFechas = ` Desde ${this.inicio} hasta ${this.final}`
+      this.filtroFechas = ` Since ${this.inicio} until ${this.final}`
     }
 
 
@@ -265,7 +265,7 @@ export class PeliculaComponent implements OnInit {
     this.resetFilters();
 
     if (this.grafo == true) {
-      this.titulo = `Grafo de ${this.pais}`
+      this.titulo = `${this.pais} tree`
       this.leftToRigth();
       this.Radial();
     }
@@ -276,9 +276,6 @@ export class PeliculaComponent implements OnInit {
 
       sessionStorage.setItem('categoria', this.categoria)
       sessionStorage.setItem('pais', this.pais)
-      // this.titulo = `Grafico de ${this.categoria} en ${this.pais}`
-      // this.tituloG1 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por años`
-      // this.tituloG2 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por clasificación `
       this.graficar();
 
     }
@@ -333,9 +330,9 @@ export class PeliculaComponent implements OnInit {
       },
     );
 
-    this.titulo = `Grafico de ${this.categoria} en ${this.pais}`
-    this.tituloG1 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por años`
-    this.tituloG2 = `Cantidad de ${this.tipo} de ${this.categoria} en ${this.pais} por clasificación `
+    this.titulo = `${this.categoria} chart by ${this.pais}`
+    this.tituloG1 = `Amount of ${this.categoria}  ${this.tipo} in ${this.pais} by years`
+    this.tituloG2 = `Amount of ${this.categoria} ${this.tipo} in ${this.pais} by clasification `
 
 
   }
@@ -397,7 +394,7 @@ export class PeliculaComponent implements OnInit {
       this.duracion = '0'
       this.showDuracion = false
       this.graficar();
-      this.filtrosFormGroup.get('duracion').setValue('');
+      this.filtrosFormGroup.get('duracion').setValue(null);
 
 
     }
@@ -407,8 +404,8 @@ export class PeliculaComponent implements OnInit {
       this.final = ''
 
       this.showFechas = false;
-      this.filtrosFormGroup.get('fechainicio').setValue('');
-      this.filtrosFormGroup.get('fechafinal').setValue('');
+      this.filtrosFormGroup.get('fechainicio').setValue(null);
+      this.filtrosFormGroup.get('fechafinal').setValue(null);
       console.log("this.showFechas");
       console.log(this.showFechas);
       this.graficar();
@@ -418,7 +415,7 @@ export class PeliculaComponent implements OnInit {
       console.log(3);
       this.actor = ''
       this.showActor = false
-      this.filtrosFormGroup.get('actor').setValue('');
+      this.filtrosFormGroup.get('actor').setValue(null);
 
       this.graficar();
 
