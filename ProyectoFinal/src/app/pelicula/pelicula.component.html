@@ -3,11 +3,11 @@
         <div class="title" (click)="onPrincipal()">
             <!-- <ngx-arc-text class="name" [text]="text" #letters>
             </ngx-arc-text> -->
-            <h1>Universo Netflix</h1>
+            <h1>Netflix Universe</h1>
         </div>
         <div class="options">
-            <button mat-button class="options-title" (click)="onPelicula()">Peliculas</button>
-            <button mat-button class="options-title" (click)="onSerie()">Series</button>
+            <button mat-button class="options-title" (click)="onPelicula()">Movies</button>
+            <button mat-button class="options-title" (click)="onSerie()">TV Shows</button>
 
         </div>
     </div>
@@ -16,18 +16,18 @@
         <div class="sidebar">
             <div class="top-menu" [@enterAnimation]>
                 <div class="menu-title">
-                    <span class="label">Opciones</span>
+                    <span class="label">Options</span>
                 </div>
                 <div class="div-form">
                     <form [formGroup]="opcionesFormGroup">
                         <mat-form-field class="form-field" appearence="outline">
-                            <mat-label class="label">Pais</mat-label>
+                            <mat-label class="label">Country</mat-label>
                             <mat-select formControlName="pais">
                                 <mat-option *ngFor='let pais of paises' [value]='pais.pais'>{{pais.pais}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field class="form-field" appearence="outline" *ngIf="!grafo">
-                            <mat-label class="label">Categoria</mat-label>
+                            <mat-label class="label">Category</mat-label>
                             <mat-select formControlName="categoria">
                                 <mat-option *ngFor="let categoria of categorias" [value]='categoria.categoria'>
                                     {{categoria.categoria}}
@@ -37,39 +37,39 @@
                     </form>
                 </div>
                 <div class="div-button">
-                    <button mat-button class="button" (click)="onGenerate()">Generar</button>
+                    <button mat-button class="button" (click)="onGenerate()">Generate</button>
                 </div>
             </div>
             <div class="above-menu" *ngIf="!grafo" [@enterAnimation]>
                 <div class="menu-title">
-                    <span class="label">Filtros</span>
+                    <span class="label">Filters</span>
                 </div>
                 <div class="div-form">
                     <form [formGroup]="filtrosFormGroup">
                         <mat-accordion class="form">
                             <mat-expansion-panel class="mat-elevation-z0 expansion" hideToggle>
                                 <mat-expansion-panel-header class="expansion">
-                                    <mat-panel-title class="label"> Fechas </mat-panel-title>
+                                    <mat-panel-title class="label"> Dates </mat-panel-title>
                                 </mat-expansion-panel-header>
                                 <mat-form-field class="expansion">
-                                    <mat-label class="label">Año inicio</mat-label>
+                                    <mat-label class="label">Initial Year</mat-label>
                                     <input matInput formControlName="fechainicio" type="number">
                                 </mat-form-field>
                                 <mat-form-field class="expansion">
-                                    <mat-label class="label">Año final</mat-label>
+                                    <mat-label class="label">End Year</mat-label>
                                     <input matInput formControlName="fechafinal" type="number">
                                 </mat-form-field>
                             </mat-expansion-panel>
                         </mat-accordion>
                         <mat-form-field class="form-field" appearence="outline" *ngIf="status">
-                            <mat-label class="label">Duración</mat-label>
+                            <mat-label class="label">Duration</mat-label>
                             <mat-select formControlName="duracion">
                                 <mat-option *ngFor="let duracion of duraciones" [value]='duracion'>{{duracion}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field class="form-field" appearence="outline" *ngIf="!status">
-                            <mat-label class="label">Temporadas</mat-label>
+                            <mat-label class="label">Seasons</mat-label>
                             <mat-select formControlName="temporada">
                                 <mat-option *ngFor="let temporada of temporadas" [value]='temporada'>{{temporada}}
                                 </mat-option>
@@ -82,7 +82,7 @@
                     </form>
                 </div>
                 <div class="div-button">
-                    <button mat-button class="button" (click)="onFilter()">Filtrar</button>
+                    <button mat-button class="button" (click)="onFilter()">Filter</button>
                 </div>
             </div>
         </div>
@@ -90,9 +90,9 @@
             <div class="main-header">
                 <span class="menu-title-g">{{titulo}}</span>
                 <div class="toggle">
-                    <span class="label-toggle">Graficos</span>
+                    <span class="label-toggle">Charts</span>
                     <mat-slide-toggle (change)="toggle($event)"></mat-slide-toggle>
-                    <span class="label-toggle">Grafos</span>
+                    <span class="label-toggle">Trees</span>
                 </div>
             </div>
             <div class="graph" *ngIf="grafo" [@enterAnimationx]>
@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="chart-filters">
-                    <h1>Filtrado por:</h1>
+                    <h1>Filtered by:</h1>
 
                     <div class="filtros" *ngIf="showDuracion">
                         {{filtroDuracion}}

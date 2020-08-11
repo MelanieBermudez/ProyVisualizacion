@@ -3,11 +3,11 @@
         <div class="title" (click)="onPrincipal()">
             <!-- <ngx-arc-text class="name" [text]="text" #letters>
             </ngx-arc-text> -->
-            <h1>universon netflix</h1>
+            <h1>Netflix Universe</h1>
         </div>
         <div class="options">
-            <button mat-button class="options-title" (click)="onPelicula()">Películas</button>
-            <button mat-button class="options-title" (click)="onSerie()">Series</button>
+            <button mat-button class="options-title" (click)="onPelicula()">Movies</button>
+            <button mat-button class="options-title" (click)="onSerie()">TV Shows</button>
         </div>
     </div>
 
@@ -15,18 +15,18 @@
         <div class="sidebar">
             <div class="top-menu">
                 <div class="menu-title">
-                    <H1>Opciones</H1>
+                    <H1>Options</H1>
                 </div>
                 <div class="div-form">
                     <form [formGroup]="opcionesFormGroup">
                         <mat-form-field class="form-field" appearence="outline">
-                            <mat-label class="label">País</mat-label>
+                            <mat-label class="label">Country</mat-label>
                             <mat-select formControlName="pais">
                                 <mat-option *ngFor='let pais of paises' [value]='pais'>{{pais.pais}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field class="form-field" appearence="outline" *ngIf="!grafo">
-                            <mat-label class="label">Categoría</mat-label>
+                            <mat-label class="label">Category</mat-label>
                             <mat-select formControlName="categoria">
                                 <mat-option *ngFor="let categoria of categorias" [value]='categoria'>
                                     {{categoria.categoria}}
@@ -36,7 +36,7 @@
                     </form>
                 </div>
                 <div class="div-button">
-                    <button mat-button class="button" (click)="onGenerate()">Generar</button>
+                    <button mat-button class="button" (click)="onGenerate()">Generate</button>
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
             </div>
             <div class="graph">
                 <div class="single-chart">
-                    <h1 class="chart-title">Total de series y películas</h1>
+                    <h1 class="chart-title">All Movies and TV Shows</h1>
 
                     <ngx-charts-pie-chart [view]="viewTree" [scheme]="colorScheme" [results]="totaltipos"
                         [gradient]="gradient" [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
@@ -59,19 +59,19 @@
                 </div>
 
                 <div class="single-chart">
-                    <h1 class="chart-title">Cantidad de producciones por categoría</h1>
+                    <h1 class="chart-title">Amount of films and shows by category</h1>
                     <ngx-charts-tree-map [view]="viewTree" [scheme]="colorScheme1" [results]="totalcategorias"
                         [gradient]="gradient" [animations]="animations" [labelFormatting]="labelFormatting">
                     </ngx-charts-tree-map>
 
                 </div>
                 <div class="single-chart">
-                    <h1 class="chart-title">Top 20 de países con mayor producción</h1>
+                    <h1 class="chart-title">Top 20 countries by films and shows</h1>
                     <ngx-charts-number-card [scheme]="colorScheme" [view]="viewTree" [results]="totalpaises">
                     </ngx-charts-number-card>
                 </div>
                 <div class="single-chart">
-                    <h1 class="chart-title">Cantidad de producciones por año</h1>
+                    <h1 class="chart-title">Amount of films and shows made by year</h1>
                     <ngx-charts-pie-grid [view]="viewNumbers" [scheme]="colorScheme" [results]="totalfechas" [label] class="piegrid">
                     </ngx-charts-pie-grid>
 
