@@ -18,7 +18,7 @@ export class PrincipalComponent implements OnInit {
 
   options: Observable<any>;
 
-  titulo = 'Estadísticas Generales'
+  titulo = 'General Data'
   grafo: boolean
   grafico = false;
   categorias = [];
@@ -31,11 +31,26 @@ export class PrincipalComponent implements OnInit {
     domain: ['#060529', '#B10606']
   };
 
-  view: any[] = [500, 400];
   viewNumbers: any[] = [1000, 1000];
   viewTree: any[] = [1000, 600];
   showLabels: boolean = true;
   isDoughnut: boolean = true;
+  animations: boolean = true;
+  colorScheme1 = {
+    domain: [
+      '#335c67',
+      '#fff3b0',
+      '#9e2a2b',
+      '#540b0e',
+      '#001524',
+      '#15616d',
+      '#ffecd1',
+      '#003049',
+      '#78290f',
+      '#B10606',
+
+    ]
+  };
 
   opcionesFormGroup = new FormGroup(
     {
@@ -54,63 +69,15 @@ export class PrincipalComponent implements OnInit {
   letters: INgxArcTextComponent;
 
 
-  ngAfterViewInit() {
-    // this.letters.text = 'Universo Netflix';
-    // this.letters.arc = 700;
-
-  }
-
   toggle(event: MatSlideToggleChange) {
     this.grafo = event.checked;
-
   }
-
-  showXAxis = true;
-  showYAxis = true;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Años';
-  showYAxisLabel = true;
-  yAxisLabel = 'Cantidad';
-  showDataLabel = true;
-
-
-  animations: boolean = true;
-
-
-
-  colorScheme1 = {
-    domain: [
-      '#335c67',
-      '#fff3b0',
-      '#9e2a2b',
-      '#540b0e',
-      '#001524',
-      '#15616d',
-      '#ffecd1',
-      '#003049',
-      '#78290f',
-      '#B10606',
-
-    ]
-  };
-
-
-
-
-
-
-
-
-
 
   onSelect(data): void {
     if (data.name == 'Movie')
       sessionStorage.setItem('tipo', 'Movie');
-
     else
       sessionStorage.setItem('tipo', 'TV Show');
-
     this.router.navigate(['peliculas']);
 
 
@@ -122,7 +89,6 @@ export class PrincipalComponent implements OnInit {
     this.router.navigate(['peliculas']);
   }
   onSerie() {
-    console.log("dasdas")
     sessionStorage.setItem('tipo', 'TV Show');
     this.router.navigate(['peliculas']);
   }
@@ -131,7 +97,6 @@ export class PrincipalComponent implements OnInit {
     this.router.navigate(['principal']);
   }
   ngOnInit() {
-    console.log(sessionStorage.getItem('tipo'));
 
     this.http.get<any>('/router/ObtenerTipoTotal').subscribe(
       (respost) => {
@@ -175,7 +140,6 @@ export class PrincipalComponent implements OnInit {
   onGenerate() {
     let categori = this.opcionesFormGroup.get('categoria').value.categoria;
     let pai = this.opcionesFormGroup.get('pais').value.pais;
-    console.log(categori);
     sessionStorage.setItem('categoria', categori);
     sessionStorage.setItem('pais', pai);
     sessionStorage.setItem('tipo', 'Movie');

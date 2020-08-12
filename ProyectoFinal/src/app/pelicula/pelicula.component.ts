@@ -54,7 +54,7 @@ export class PeliculaComponent implements OnInit {
   grafico = false;
   categorias = [];
   paises = [];
-  directores = [];
+
   temporadas = ['1', '2', '3', '4', '5', '6', '7 ', '8 ', '9 ']
   duraciones = ['30', '60', '90', '100']
   tituloG1;
@@ -95,7 +95,7 @@ export class PeliculaComponent implements OnInit {
   showXAxisLabel = true;
   xAxisLabel = 'Years';
   showYAxisLabel = true;
-  yAxisLabel = 'Quantity';
+  yAxisLabel = 'Amount';
   showDataLabel = true;
 
 
@@ -111,7 +111,6 @@ export class PeliculaComponent implements OnInit {
       fechainicio: new FormControl(null),
       fechafinal: new FormControl(null),
       duracion: new FormControl(null),
-      director: new FormControl(null),
       actor: new FormControl(null),
       temporada: new FormControl(null),
 
@@ -174,18 +173,13 @@ export class PeliculaComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.status = this.localStorage();
-
-
-
     this.tipo = sessionStorage.getItem('tipo');
     this.pais = sessionStorage.getItem('pais');
     this.categoria = sessionStorage.getItem('categoria');
-
-
     this.opcionesFormGroup.get('categoria').setValue(this.categoria);
     this.opcionesFormGroup.get('pais').setValue(this.pais);
-
 
     this.http.post<any>('/router/ObtenerPaisesInit', { tipo: this.tipo }).subscribe(
       (respost) => {
@@ -206,7 +200,6 @@ export class PeliculaComponent implements OnInit {
   }
 
   checkFilters() {
-    console.log("check filters");
     if (this.tipo == 'Movie') {
       this.ButtonType = true;
       if (this.duracion != null || this.duracion != '') {
@@ -299,7 +292,6 @@ export class PeliculaComponent implements OnInit {
     }
 
 
-    console.log(this.showActor, this.showDuracion, this.showFechas);
 
 
 
@@ -319,7 +311,8 @@ export class PeliculaComponent implements OnInit {
     this.http.post<any>('/router/ObtenerYearFil', formData).subscribe(
       (respost) => {
         this.categories = respost[0];
-        console.log(this.categories);
+        console.log("this.categories");
+        console.log(respost[0]);
       },
     );
 
@@ -339,32 +332,24 @@ export class PeliculaComponent implements OnInit {
 
   onFilter() {
 
-    console.log(this.filtrosFormGroup.get('actor').value);
-    console.log(this.filtrosFormGroup.get('duracion').value);
-    console.log(this.filtrosFormGroup.get('temporada').value);
 
     if (this.filtrosFormGroup.get('actor').value != null) {
       this.actor = this.filtrosFormGroup.get('actor').value;
-      console.log("entro actor");
       this.showActor = true;
     }
     else
       this.actor = ''
 
     if (this.filtrosFormGroup.get('duracion').value != null) {
-      console.log("movie");
       this.duracion = this.filtrosFormGroup.get('duracion').value;
-      console.log("entro duracion");
 
       this.showDuracion = true;
     }
 
     if (this.filtrosFormGroup.get('temporada').value != null) {
-      console.log("temporada");
       this.duracion = this.filtrosFormGroup.get('temporada').value;
       this.temporada = this.filtrosFormGroup.get('temporada').value;
       // this.duracion = ''
-      console.log("entro temporads");
 
       this.showDuracion = true;
 
@@ -373,7 +358,6 @@ export class PeliculaComponent implements OnInit {
     if (this.filtrosFormGroup.get('fechainicio').value != null && this.filtrosFormGroup.get('fechafinal').value != null) {
       this.inicio = this.filtrosFormGroup.get('fechainicio').value;
       this.final = this.filtrosFormGroup.get('fechafinal').value;
-      console.log("entro fechas");
 
       this.showFechas = true;
 
@@ -388,31 +372,26 @@ export class PeliculaComponent implements OnInit {
 
   deleteFilter(type) {
 
-    console.log(type);
     if (type == 1) {
-      console.log(1);
       this.duracion = '0'
       this.showDuracion = false
       this.graficar();
       this.filtrosFormGroup.get('duracion').setValue(null);
+      this.filtrosFormGroup.get('temporada').setValue(null);
 
 
     }
     if (type == 2) {
-      console.log(2);
       this.inicio = ''
       this.final = ''
 
       this.showFechas = false;
       this.filtrosFormGroup.get('fechainicio').setValue(null);
       this.filtrosFormGroup.get('fechafinal').setValue(null);
-      console.log("this.showFechas");
-      console.log(this.showFechas);
       this.graficar();
 
     }
     if (type == 3) {
-      console.log(3);
       this.actor = ''
       this.showActor = false
       this.filtrosFormGroup.get('actor').setValue(null);
@@ -437,7 +416,7 @@ export class PeliculaComponent implements OnInit {
 
 
     }
-
+    console.log(formData);
     sessionStorage.setItem('moviesTitles', JSON.stringify(formData));
     sessionStorage.setItem('dialogType', 'year');
 
@@ -463,7 +442,6 @@ export class PeliculaComponent implements OnInit {
       clasificacion: event.name
     }
 
-    console.log(formData);
     sessionStorage.setItem('moviesTitles', JSON.stringify(formData));
     sessionStorage.setItem('dialogType', 'clasification');
 
