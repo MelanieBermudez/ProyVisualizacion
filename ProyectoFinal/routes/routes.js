@@ -192,7 +192,6 @@ router.post('/ObtenerPaisCategArbol', function(req, res, next) {
 
                 }
             }
-            console.log(listaelenco)
             //asignamos elenco a cada titulo del json 
             var t = 0,u=0,v=0
             for (t = 0; t <listacategorias.length; t++) {
@@ -204,8 +203,6 @@ router.post('/ObtenerPaisCategArbol', function(req, res, next) {
                 }
             }            
 
-            console.log('arbol con cat y titulos y elenco')
-            console.log(arbolData)
 
             res.send(arbolData);
         } else

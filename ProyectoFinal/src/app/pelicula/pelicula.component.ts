@@ -64,7 +64,6 @@ export class PeliculaComponent implements OnInit {
   titles = []
   clasifications = []
   ButtonType = false;
-  ButtonMovie = false;
 
   tipo: string = 'Movie';
   categoria: string = 'Comedies';
@@ -98,7 +97,10 @@ export class PeliculaComponent implements OnInit {
   yAxisLabel = 'Amount';
   showDataLabel = true;
 
+  yAxisTickFormatting = value => `${value.toString()}`;
 
+
+  public yAxisTickFormattingFn = this.yAxisTickFormatting.bind(this);
 
   opcionesFormGroup = new FormGroup(
     {
@@ -128,18 +130,13 @@ export class PeliculaComponent implements OnInit {
 
   }
 
-
   @ViewChild('letters', { static: true })
   letters: INgxArcTextComponent;
-
-
-
 
   toggle(event: MatSlideToggleChange) {
     this.grafo = event.checked;
 
   }
-
 
   onPelicula() {
     sessionStorage.setItem('tipo', 'Movie');
@@ -155,8 +152,6 @@ export class PeliculaComponent implements OnInit {
 
   }
 
-
-
   onPrincipal() {
     this.router.navigate(['principal']);
   }
@@ -169,8 +164,6 @@ export class PeliculaComponent implements OnInit {
       return false
 
   }
-
-
 
   ngOnInit() {
 
@@ -215,7 +208,7 @@ export class PeliculaComponent implements OnInit {
 
     if (this.actor != null || this.actor != '') {
 
-      this.filtroActor = `Actor: ${this.actor}`
+      this.filtroActor = `Actor ${this.actor}`
     }
     if (this.inicio != null || this.inicio != '' && this.final != null || this.final != '') {
 
@@ -307,12 +300,11 @@ export class PeliculaComponent implements OnInit {
 
     }
 
-    console.log(formData);
     this.http.post<any>('/router/ObtenerYearFil', formData).subscribe(
       (respost) => {
         this.categories = respost[0];
-        console.log("this.categories");
-        console.log(respost[0]);
+        
+        console.log(this.categories);
       },
     );
 
@@ -323,7 +315,7 @@ export class PeliculaComponent implements OnInit {
       },
     );
 
-    this.titulo = `${this.categoria} chart by ${this.pais}`
+    this.titulo = `${this.categoria} charts by ${this.pais}`
     this.tituloG1 = `Amount of ${this.categoria}  ${this.tipo} in ${this.pais} by years`
     this.tituloG2 = `Amount of ${this.categoria} ${this.tipo} in ${this.pais} by clasification `
 
@@ -424,6 +416,8 @@ export class PeliculaComponent implements OnInit {
       (respost) => {
         this.dialog.open(TitleDialogComponent, { data: { data: respost[0] } });
         this.titles = respost[0];
+        console.log(this.titles);
+        console.log(respost);
       },
     );
 

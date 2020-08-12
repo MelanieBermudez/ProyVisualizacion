@@ -182,8 +182,6 @@
 .graph {
     width: 100%;
     overflow: scroll;
-    /* height: 1000px; */
-    /* background-color: #060529; */
 }
 
 .expansion {
@@ -223,7 +221,6 @@
 }
 .demo-chart {
     height: 1000px;
-    /* padding: 100px; */
 }
 
 .single-chart {
@@ -247,7 +244,6 @@
     height: 80%;
     color: #060529;
     flex-wrap: wrap;
-    /* padding: 10px; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -287,20 +283,17 @@
     background-color: #B10606;
 }
 
-/* width */
 
 ::-webkit-scrollbar {
     width: 8px;
 }
 
-/* Track */
 
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey;
     border-radius: 8px;
 }
 
-/* Handle */
 
 ::-webkit-scrollbar-thumb {
     background: #B10606;

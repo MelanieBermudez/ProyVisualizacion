@@ -107,7 +107,7 @@
                         <ngx-charts-bar-vertical [scheme]="colorScheme" [view]="view" [results]="categories"
                             [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
                             [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
-                            [showDataLabel]="showDataLabel" class="grafico" (select)="titlesYear($event)">
+                            [showDataLabel]="showDataLabel" class="grafico" (select)="titlesYear($event)" [xAxisTickFormatting]="yAxisTickFormattingFn">
                         </ngx-charts-bar-vertical>
                     </div>
 
