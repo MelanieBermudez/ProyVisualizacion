@@ -21,6 +21,8 @@
 .title {
     display: flex;
     width: 25%;
+    align-items: center;
+
 }
 .titulo{
     font-size: 50px;
